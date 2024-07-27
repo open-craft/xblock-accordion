@@ -1,5 +1,18 @@
-<div class="accordion_block">
-<p>AccordionXBlock: count is now
-    <span class='count'>{self.count}</span> (click me to increment).
-</p>
+<div class="xblock--accordion--editor editor-with-buttons">
+
+    <div class="xblock-actions">
+      <ul class="action-buttons">
+        <li class="action-item">
+          <a href="#" class="button action-primary continue-button">{% trans "Continue" %}</a>
+        </li>
+
+        <li class="action-item hidden">
+          <a href="#" class="button action-primary save-button">{% trans "Save" %}</a>
+        </li>
+
+        <li class="action-item">
+          <a href="#" class="button cancel-button">{% trans "Cancel" %}</a>
+        </li>
+      </ul>
+    </div>
 </div>
