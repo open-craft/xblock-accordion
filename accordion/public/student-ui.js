@@ -7282,14 +7282,14 @@ function Uh({ panels: e, styling: t }) {
           /* @__PURE__ */ le.jsxs(
             Su,
             {
-              className: "collapsible-trigger rounded-0",
+              className: "collapsible-trigger rounded-0 px-3 py-2",
               style: {
                 backgroundColor: t == null ? void 0 : t.backgroundColor,
                 color: t == null ? void 0 : t.textColor,
                 fontSize: t == null ? void 0 : t.fontSize
               },
               children: [
-                /* @__PURE__ */ le.jsx("span", { className: "flex-grow-1", children: u.title }),
+                /* @__PURE__ */ le.jsx("span", { className: "flex-grow-1 my-0", children: u.title }),
                 /* @__PURE__ */ le.jsx(_o, { whenClosed: !0, children: /* @__PURE__ */ le.jsx(wo, { src: Fh }) }),
                 /* @__PURE__ */ le.jsx(_o, { whenOpen: !0, children: /* @__PURE__ */ le.jsx(wo, { src: bh }) })
               ]

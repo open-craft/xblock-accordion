@@ -18895,7 +18895,7 @@ function Kte({
   setColor: i,
   help: u
 }) {
-  return /* @__PURE__ */ cs.jsxs("div", { className: "d-flex flex-column mb-3", children: [
+  return /* @__PURE__ */ cs.jsxs("div", { className: "d-flex flex-column pb-3", children: [
     /* @__PURE__ */ cs.jsxs("div", { className: "d-flex align-items-center", "data-testid": o, children: [
       /* @__PURE__ */ cs.jsx("span", { className: "mr-2", children: o }),
       /* @__PURE__ */ cs.jsx(
@@ -18916,8 +18916,8 @@ function FEe({
 }) {
   const i = (u) => r({ ...o, ...u });
   return /* @__PURE__ */ cs.jsxs("div", { style: { maxWidth: "800px" }, children: [
-    /* @__PURE__ */ cs.jsx("h2", { className: "mb-2", children: "Styling of Accordions" }),
-    /* @__PURE__ */ cs.jsxs(H3, { className: "d-flex align-items-center", children: [
+    /* @__PURE__ */ cs.jsx("h3", { className: "mb-2", children: "Styling of Accordions" }),
+    /* @__PURE__ */ cs.jsxs(H3, { className: "d-flex align-items-center py-2", children: [
       /* @__PURE__ */ cs.jsx(Pw, { isInline: !0, children: "Font size" }),
       /* @__PURE__ */ cs.jsx(Mw, { size: "sm", controlClassName: "px-2 py-0", className: "flex-grow-0 p-0", value: o.fontSize, onChange: (u) => i({ fontSize: u.target.value }) })
     ] }),
@@ -72015,13 +72015,14 @@ function XEe({ panels: o, setPanels: r }) {
   };
   return /* @__PURE__ */ cs.jsxs(cs.Fragment, { children: [
     /* @__PURE__ */ cs.jsx("div", { className: "d-flex justify-content-end", children: /* @__PURE__ */ cs.jsx(Nk, { iconBefore: mwe, onClick: h, children: "Add Accordion" }) }),
-    /* @__PURE__ */ cs.jsxs("div", { className: "d-flex flex-row", children: [
+    /* @__PURE__ */ cs.jsxs("div", { className: "d-flex flex-row mx-2", children: [
       /* @__PURE__ */ cs.jsx("div", { className: "d-flex flex-column mr-2", style: { flexGrow: 1, width: "25%" }, children: o.map((k, _) => /* @__PURE__ */ cs.jsx(
         Nk,
         {
-          className: "justify-content-start",
+          className: "justify-content-start font-weight-bold p-2 rounded-0",
           variant: i === _ ? "light" : "outline",
           onClick: () => u(_),
+          size: "lg",
           children: k.title || "Untitled accordion item"
         },
         `${k.title}-${_}`
@@ -72123,7 +72124,10 @@ function QEe({
     ] }) })
   ] }) });
 }
-const tTe = (o, r, { panels: i, styling: u }) => {
+const tTe = (o, r, {
+  panels: i,
+  styling: u
+}) => {
   const h = o.handlerUrl(r, "studio_save");
   Vre.render(
     /* @__PURE__ */ cs.jsx(et.StrictMode, { children: /* @__PURE__ */ cs.jsx(

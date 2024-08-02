@@ -26,14 +26,16 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
       <div className="d-flex justify-content-end">
         <Button iconBefore={Plus} onClick={addNewPanel}>Add Accordion</Button>
       </div>
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row mx-2">
         <div className="d-flex flex-column mr-2" style={{ flexGrow: 1, width: '25%' }}>
           {panels.map((panel, idx) => (
             <Button
-              className="justify-content-start"
+              className="justify-content-start font-weight-bold p-2 rounded-0"
               key={`${panel.title}-${idx}`} // eslint-disable-line react/no-array-index-key
               variant={selectedPanel === idx ? 'light' : 'outline'}
               onClick={() => setSelectedPanel(idx)}
+              size="lg"
+              // style={{fontSize: '1.5rem'}}
             >
               {panel.title || 'Untitled accordion item'}
             </Button>

@@ -47,14 +47,14 @@ function StudentUi({ panels: rawPanels, styling }: StudentUiProps) {
           key={`${panel.title}-${idx}`} // eslint-disable-line react/no-array-index-key
         >
           <CollapsibleTrigger
-            className="collapsible-trigger rounded-0"
+            className="collapsible-trigger rounded-0 px-3 py-2"
             style={{
               backgroundColor: styling?.backgroundColor,
               color: styling?.textColor,
               fontSize: styling?.fontSize,
             }}
           >
-            <span className="flex-grow-1">{panel.title}</span>
+            <span className="flex-grow-1 my-0">{panel.title}</span>
             <CollapsibleVisible whenClosed><Icon src={KeyboardArrowDown} /></CollapsibleVisible>
             <CollapsibleVisible whenOpen><Icon src={KeyboardArrowUp} /></CollapsibleVisible>
           </CollapsibleTrigger>

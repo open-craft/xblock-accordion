@@ -10,5 +10,8 @@ renderBlock(document.querySelector('#root'), {
       contents: '<b>Test</b>',
     },
   ],
-  styling: {},
+  styling: {
+    backgroundColor: '#001155',
+    textColor: '#ffffff',
+  },
 });

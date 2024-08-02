@@ -19,7 +19,7 @@ function ColorSelector({
   label, color, setColor, help,
 }:ColorSelectorProps) {
   return (
-    <div className="d-flex flex-column mb-3">
+    <div className="d-flex flex-column pb-3">
       <div className="d-flex align-items-center" data-testid={label}>
         <span className="mr-2">{label}</span>
         <ColorPicker
@@ -40,8 +40,8 @@ export default function StylingPage({
   const updateStyling = (changes: Partial<PanelStyling>) => setStyling({ ...styling, ...changes });
   return (
     <div style={{ maxWidth: '800px' }}>
-      <h2 className="mb-2">Styling of Accordions</h2>
-      <FormGroup className="d-flex align-items-center">
+      <h3 className="mb-2">Styling of Accordions</h3>
+      <FormGroup className="d-flex align-items-center py-2">
         <FormLabel isInline>Font size</FormLabel>
         <FormControl size="sm" controlClassName="px-2 py-0" className="flex-grow-0 p-0" value={styling.fontSize} onChange={(e) => updateStyling({ fontSize: e.target.value })} />
       </FormGroup>
