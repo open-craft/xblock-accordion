@@ -7,6 +7,6 @@ coverage:
     patch:
       default:
         enabled: yes
-        target: 90%
+        target: 100%
 
 comment: false

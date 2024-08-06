@@ -36,5 +36,5 @@ Usage
 To use the XBlock in a course, you need to ensure that you have "accordion" in the
 **Advanced Modules List** in the Advanced settings page of the course.
 
-Once added there you will be able to add an Accordion block from the **Advanced Modules*
+Once added there you will be able to add an Accordion block from the **Advanced Modules**
 section of blocks.

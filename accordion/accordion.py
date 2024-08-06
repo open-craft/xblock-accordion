@@ -2,7 +2,7 @@
 An XBlock for creating and accordion component with multiple panels with rich content.
 """
 
-from importlib import resources
+import importlib_resources
 
 from django.utils import translation
 from web_fragments.fragment import Fragment
@@ -24,7 +24,7 @@ class AccordionXBlock(XBlock):
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
-        data = resources.files("accordion").joinpath(path).read_text("utf8")
+        data = importlib_resources.files("accordion").joinpath(path).read_text("utf8")
         return data
 
     def student_view(self, context=None):  # pylint: disable=unused-argument
