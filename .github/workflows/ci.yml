@@ -15,8 +15,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-20.04]
-
-        python-version: [ '3.8 3.11 3.12' ]
         toxenv: [quality, docs, py38-django32, py311-django42, py312-django42]
 
     steps:
@@ -24,7 +22,10 @@ jobs:
     - name: setup python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: |
+          3.8
+          3.11
+          3.12
 
     - name: Install pip
       run: pip install -r requirements/pip.txt
@@ -38,7 +39,7 @@ jobs:
       run: tox
 
     - name: Run coverage
-      if: matrix.python-version == '3.8' && matrix.toxenv == 'django32'
+      if: matrix.toxenv == 'django32'
       uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
