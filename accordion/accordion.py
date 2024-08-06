@@ -3,7 +3,6 @@ An XBlock for creating and accordion component with multiple panels with rich co
 """
 
 import importlib_resources
-
 from django.utils import translation
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
