@@ -2,11 +2,15 @@
 An XBlock for creating and accordion component with multiple panels with rich content.
 """
 
-import importlib_resources
 from django.utils import translation
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
 from xblock.fields import Dict, List, Scope, String
+
+try:
+    import importlib_resources
+except ImportError:
+    from importlib import importlib_resources as importlib_resources
 
 
 class AccordionXBlock(XBlock):
