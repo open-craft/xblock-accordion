@@ -9,6 +9,7 @@
     "build:student": "COMPONENT=student-ui npm run _build",
     "build:studio": "COMPONENT=studio-ui npm run _build",
     "build": "npm run build:studio && npm run build:student",
+    "check-build": "npm run build && git diff --exit-code",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
