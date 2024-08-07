@@ -16,7 +16,7 @@ class AccordionXBlock(XBlock):
 
     display_name = String(default=translation.gettext_noop("Accordion"))
     panels = List(help="Accordion entries", default=[], scope=Scope.content)
-    styling = Dict(help="Accordion styling", default=[], scope=Scope.content)
+    styling = Dict(help="Accordion styling", default={}, scope=Scope.content)
     border_style = String(
         help="Accordion border style", default="", scope=Scope.content
     )
