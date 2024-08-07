@@ -15,9 +15,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET", "open_secret")
 
 # Application definition
 
-INSTALLED_APPS = (
-    "accordion",
-)
+INSTALLED_APPS = ("accordion",)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

@@ -33,7 +33,6 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
               variant={selectedPanel === idx ? 'light' : 'outline'}
               onClick={() => setSelectedPanel(idx)}
               size="lg"
-              // style={{fontSize: '1.5rem'}}
             >
               {panel.title || 'Untitled accordion item'}
             </Button>

@@ -48,7 +48,9 @@ class AccordionXBlock(XBlock):
         return frag
 
     @XBlock.json_handler
-    def studio_save(self, data, suffix=""):  # pragma: no cover pylint: disable=unused-argument
+    def studio_save(
+        self, data, suffix=""
+    ):  # pragma: no cover pylint: disable=unused-argument
         """Save config and data based on data received at this API endpoint."""
         panels = data.get("panels", None)
         styling = data.get("styling", None)

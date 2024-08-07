@@ -15,6 +15,13 @@ authors = [
 keywords = [
     "Python",
     "edx",
+    "XBlock",
+    "openedx",
+    "TypeScript",
+    "plugin",
+    "tsx",
+    "jsx",
+    "vite",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
