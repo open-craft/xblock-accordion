@@ -9,6 +9,9 @@ export default defineConfig({
         server: {
             deps: {
                 inline: [
+                    // Paragon icons are exported in a format that
+                    // node can't handle. This will inline the code so the
+                    // tests can run without issue.
                     "@openedx/paragon/icons"
                 ]
             }

@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  ColorPicker, FormControl, FormGroup, FormLabel,
-} from '@openedx/paragon';
+import { ColorPicker } from '@openedx/paragon';
 
 interface StylingPageProps {
   styling: PanelStyling
@@ -40,11 +38,16 @@ export default function StylingPage({
   const updateStyling = (changes: Partial<PanelStyling>) => setStyling({ ...styling, ...changes });
   return (
     <div style={{ maxWidth: '800px' }}>
-      <h3 className="mb-2">Styling of Accordions</h3>
-      <FormGroup className="d-flex align-items-center py-2">
-        <FormLabel isInline>Font size</FormLabel>
-        <FormControl size="sm" controlClassName="px-2 py-0" className="flex-grow-0 p-0" value={styling.fontSize} onChange={(e) => updateStyling({ fontSize: e.target.value })} />
-      </FormGroup>
+      <h3 className="mb-2 h3">Styling of Accordions</h3>
+      <div className="d-flex align-items-center mb-2">
+        <label className="mr-2" htmlFor="font-size-input">Font size</label>
+        <input
+          id="font-size-input"
+          value={styling.fontSize}
+          onChange={(e) => updateStyling({ fontSize: e.target.value })}
+        />
+      </div>
+
       <ColorSelector
         label="Background color"
         help="Background color of accordion titles"

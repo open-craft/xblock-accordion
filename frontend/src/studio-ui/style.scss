@@ -1,7 +1,7 @@
 @import "../index";
 @import "~@openedx/paragon/scss/core/utilities";
-@import "~@openedx/paragon/src/Form/index.scss";
 @import "~@openedx/paragon/src/ColorPicker/index.scss";
+@import "~@openedx/paragon/src/Form/index.scss";
 
 .xblock-accordion {
     .d-flex {
@@ -18,5 +18,9 @@
 
     .rounded-0 {
         border-radius: 0;
+    }
+
+    label {
+        font-size: 1.6rem;
     }
 }

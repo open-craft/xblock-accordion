@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  Button, FormControl, FormGroup, FormLabel,
-} from '@openedx/paragon';
+import { Button } from '@openedx/paragon';
 import { Plus } from '@openedx/paragon/icons';
 import TinyMceEditor from './TinyMceEditor';
 
@@ -44,22 +42,22 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
         <div className="d-flex flex-column" style={{ flexGrow: 3 }}>
           {selectedPanel !== null && panels[selectedPanel] && (
           <>
-            <FormGroup>
-              <FormLabel>Title</FormLabel>
-              <FormControl
-                controlClassName="px-2 py-0"
-                size="sm"
+            <div className="mb-2 d-flex flex-column">
+              <label className="mb-2" htmlFor="accordion-title">Title</label>
+              <input
+                id="accordion-title"
+                className="px-2 py-0"
                 value={panels[selectedPanel].title || ''}
                 onChange={(e) => updatePanel(selectedPanel, { title: e.target.value })}
               />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Content</FormLabel>
+            </div>
+            <div>
+              <span className="mb-2">Content</span>
               <TinyMceEditor
                 value={panels[selectedPanel].contents}
                 onChange={(val) => updatePanel(selectedPanel, { contents: val })}
               />
-            </FormGroup>
+            </div>
           </>
           )}
         </div>
