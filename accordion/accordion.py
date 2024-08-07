@@ -9,7 +9,7 @@ from xblock.fields import Dict, List, Scope, String
 
 try:
     import importlib_resources
-except ImportError:
+except ImportError:  # pragma: no cover
     from importlib import resources as importlib_resources
 
 
@@ -48,7 +48,7 @@ class AccordionXBlock(XBlock):
         return frag
 
     @XBlock.json_handler
-    def studio_save(self, data, suffix=""):  # pylint: disable=unused-argument
+    def studio_save(self, data, suffix=""):  # pragma: no cover pylint: disable=unused-argument
         """Save config and data based on data received at this API endpoint."""
         panels = data.get("panels", None)
         styling = data.get("styling", None)
@@ -76,7 +76,7 @@ class AccordionXBlock(XBlock):
         return frag
 
     @staticmethod
-    def workbench_scenarios():
+    def workbench_scenarios():  # pragma: no cover
         """Create canned scenario for display in the workbench."""
         return [
             (
