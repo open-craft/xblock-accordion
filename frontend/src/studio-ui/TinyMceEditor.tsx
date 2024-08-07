@@ -4,7 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 // TinyMCE so the global var exists
 import 'tinymce/tinymce';
 // DOM model
- import 'tinymce/models/dom/model';
+import 'tinymce/models/dom/model';
 // Theme
 import 'tinymce/themes/silver';
 // Toolbar icons
