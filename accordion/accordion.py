@@ -10,7 +10,7 @@ from xblock.fields import Dict, List, Scope, String
 try:
     import importlib_resources
 except ImportError:
-    from importlib import importlib_resources as importlib_resources
+    from importlib import resources as importlib_resources
 
 
 class AccordionXBlock(XBlock):
