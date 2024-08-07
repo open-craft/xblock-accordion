@@ -10,3 +10,7 @@
 
 # Common constraints for edx repos
 -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+
+# This package should only be intalled and only works on python 3.9 and below
+# since it is a backport of the standard library zoneinfo module
+backports.zoneinfo==0.2.1; python_version<"3.9"

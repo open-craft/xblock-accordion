@@ -1,0 +1,26 @@
+@import "../index";
+@import "~@openedx/paragon/scss/core/utilities";
+@import "~@openedx/paragon/src/ColorPicker/index.scss";
+@import "~@openedx/paragon/src/Form/index.scss";
+
+.xblock-accordion {
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-end {
+        justify-content: flex-end;
+    }
+
+    .mb-2 {
+        margin-bottom: 0.5rem;
+    }
+
+    .rounded-0 {
+        border-radius: 0;
+    }
+
+    label {
+        font-size: 1.6rem;
+    }
+}

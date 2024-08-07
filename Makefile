@@ -49,7 +49,7 @@ dev.build:
 	docker build -t $(REPO_NAME)-dev $(CURDIR)
 
 dev.run: dev.clean dev.build ## Clean, build and run test image
-	docker run -p 8000:8000 -v $(CURDIR):/usr/local/src/$(REPO_NAME) --name $(REPO_NAME)-dev $(REPO_NAME)-dev
+	docker run -p 8200:8000 -v $(CURDIR):/usr/local/src/$(REPO_NAME) --name $(REPO_NAME)-dev $(REPO_NAME)-dev
 
 ## Localization targets
 
