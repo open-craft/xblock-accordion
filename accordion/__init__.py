@@ -4,4 +4,4 @@ Init for the AccordionXBlock package.
 
 from .accordion import AccordionXBlock
 
-__version__ = '0.1.0'
+__version__ = "1.0.0"

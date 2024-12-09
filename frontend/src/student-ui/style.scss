@@ -1,0 +1,32 @@
+@import "../index";
+// Needed for collapse animations
+@import "~bootstrap/scss/transitions";
+@import "~@openedx/paragon/src/Card/index.scss";
+@import "~@openedx/paragon/src/Collapsible/index.scss";
+
+.xblock-accordion {
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-end {
+        justify-content: flex-end;
+    }
+
+    .mb-2 {
+        margin-bottom: 0.5rem;
+    }
+
+    .px-3 {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    .py-2 {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .rounded-0 {
+        border-radius: 0;
+    }
+}

@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "xblock-accordion"
+dynamic = ["version"]
+description = "Accordion XBlock"
+readme = "README.rst"
+license = {file = "LICENSE.txt"}
+requires-python = ">=3.8"
+authors = [
+    { name = "OpenCraft", email = "help+xblock@opencraft.com" },
+]
+keywords = [
+    "Python",
+    "edx",
+    "XBlock",
+    "openedx",
+    "TypeScript",
+    "plugin",
+    "tsx",
+    "jsx",
+    "vite",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "edx-i18n-tools",
+    "XBlock",
+    "xblock-utils",
+    "pydantic < 3.0",
+]
+
+[project.entry-points."xblock.v1"]
+accordion = "accordion:AccordionXBlock"
+
+[project.urls]
+Homepage = "https://github.com/open-craft/xblock-accordion"
+
+[tool.hatch.version]
+path = "accordion/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/accordion",
+]
+[tool.hatch.build.targets.wheel]
+packages = ["accordion"]
+
+[tool.isort]
+include_trailing_comma = true
+indent = '    '
+line_length = 120
+multi_line_output = 3
+skip=["migrations"]
