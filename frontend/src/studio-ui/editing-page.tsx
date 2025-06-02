@@ -19,6 +19,19 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
     Object.assign(newPanels[idx], change);
     setPanels(newPanels);
   };
+  // remove a panel by index
+  const deletePanel = (idx: number) => {
+    const newPanels = panels.filter((_, i) => i !== idx);
+    setPanels(newPanels);
+    // adjust selected panel: choose next or previous
+    if (newPanels.length === 0) {
+      setSelectedPanel(null);
+    } else if (idx >= newPanels.length) {
+      setSelectedPanel(newPanels.length - 1);
+    } else {
+      setSelectedPanel(idx);
+    }
+  };
   return (
     <>
       <div className="d-flex justify-content-end">
@@ -56,6 +69,14 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
                 value={panels[selectedPanel].contents}
                 onChange={(val) => updatePanel(selectedPanel, { contents: val })}
               />
+            </div>
+            <div className="mt-3">
+              <Button
+                variant="danger"
+                onClick={() => deletePanel(selectedPanel)}
+              >
+                Delete
+              </Button>
             </div>
           </>
           )}
