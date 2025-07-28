@@ -58,6 +58,7 @@ class AccordionXBlock(XBlock):
             self.panels = panels
         if styling:
             self.styling = styling
+        return {"result": "success"}
 
     def studio_view(self, context=None):  # pylint: disable=unused-argument
         """

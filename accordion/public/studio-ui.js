@@ -72194,7 +72194,11 @@ function uTe({
     0
     /* Styling */
   ), [k, E] = et.useState(r), [D, L] = et.useState(o), U = () => {
-    u.notify("save", { state: "start" }), $.post(i, JSON.stringify({ styling: k, panels: D })), u.notify("save", { state: "end" });
+    u.notify("save", { state: "start" }), $.post(i, JSON.stringify({ styling: k, panels: D })).done(() => {
+      u.notify("save", { state: "end" });
+    }).fail(() => {
+      u.notify("error", { title: "Save Error", message: "Failed to save accordion configuration" });
+    });
   };
   return /* @__PURE__ */ Jr.jsx("div", { className: "xblock-accordion xblock--accordion--editor editor-with-buttons", children: /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex flex-column", style: { height: "375px" }, children: [
     /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex flex-column overflow-auto m-2.5", children: [

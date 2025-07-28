@@ -41,8 +41,13 @@ export default function StudioUi({
   const [panels, setPanels] = React.useState(initialPanels);
   const handleSave = () => {
     runtime.notify('save', { state: 'start' });
-    $.post(studioSaveUrl, JSON.stringify({ styling, panels }));
-    runtime.notify('save', { state: 'end' });
+    $.post(studioSaveUrl, JSON.stringify({ styling, panels }))
+      .done(() => {
+        runtime.notify('save', { state: 'end' });
+      })
+      .fail(() => {
+        runtime.notify('error', { title: "Save Error", message: "Failed to save accordion configuration" });
+      });
   };
   return (
     <div className="xblock-accordion xblock--accordion--editor editor-with-buttons">
