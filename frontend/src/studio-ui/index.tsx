@@ -8,10 +8,10 @@ export const renderEditor = (runtime: XBlockRuntime, element: Element | null, {
   panels,
   styling,
 }: XBlockData) => {
-  // Handle both jQuery objects and DOM elements
   const container = element && 'jquery' in element ? element[0] : element;
 
   if (!container || !(container instanceof Element)) {
+    // eslint-disable-next-line no-console
     console.error('Invalid DOM element provided to renderEditor:', element);
     return;
   }

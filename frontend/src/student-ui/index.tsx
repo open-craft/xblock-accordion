@@ -5,10 +5,10 @@ import './style.scss';
 
 // eslint-disable-next-line import/prefer-default-export
 export const renderBlock = (element: Element | null, { panels, styling }: XBlockData) => {
-  // Handle both jQuery objects and DOM elements
   const container = element && 'jquery' in element ? element[0] : element;
 
   if (!container || !(container instanceof Element)) {
+    // eslint-disable-next-line no-console
     console.error('Invalid DOM element provided to renderBlock:', element);
     return;
   }

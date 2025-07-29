@@ -7,7 +7,12 @@ import React from 'react';
 import StudioUi from './studio-ui';
 
 const jqueryMock = {
-  post: vi.fn(),
+  post: vi.fn(() => ({
+    done: vi.fn((callback) => {
+      callback();
+      return { fail: vi.fn() };
+    }),
+  })),
 };
 vi.stubGlobal('$', jqueryMock);
 vi.mock('./TinyMceEditor', () => ({

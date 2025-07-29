@@ -308,7 +308,7 @@ function kde(o, r, i) {
 q5.jsx = kde;
 q5.jsxs = kde;
 ide.exports = q5;
-var Jr = ide.exports, _de = { exports: {} }, Eh = {}, Ede = { exports: {} }, Tde = {};
+var Qr = ide.exports, _de = { exports: {} }, Eh = {}, Ede = { exports: {} }, Tde = {};
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -18981,10 +18981,10 @@ function Xte({
   setColor: i,
   help: u
 }) {
-  return /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex flex-column pb-3", children: [
-    /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex align-items-center", "data-testid": o, children: [
-      /* @__PURE__ */ Jr.jsx("span", { className: "mr-2", children: o }),
-      /* @__PURE__ */ Jr.jsx(
+  return /* @__PURE__ */ Qr.jsxs("div", { className: "d-flex flex-column pb-3", children: [
+    /* @__PURE__ */ Qr.jsxs("div", { className: "d-flex align-items-center", "data-testid": o, children: [
+      /* @__PURE__ */ Qr.jsx("span", { className: "mr-2", children: o }),
+      /* @__PURE__ */ Qr.jsx(
         pae,
         {
           size: "sm",
@@ -18993,7 +18993,7 @@ function Xte({
         }
       )
     ] }),
-    /* @__PURE__ */ Jr.jsx("span", { className: "text-light-800 small mt-2", children: u })
+    /* @__PURE__ */ Qr.jsx("span", { className: "text-light-800 small mt-2", children: u })
   ] });
 }
 function qEe({
@@ -19001,11 +19001,11 @@ function qEe({
   setStyling: r
 }) {
   const i = (u) => r({ ...o, ...u });
-  return /* @__PURE__ */ Jr.jsxs("div", { style: { maxWidth: "800px" }, children: [
-    /* @__PURE__ */ Jr.jsx("h3", { className: "mb-2 h3", children: "Styling of Accordions" }),
-    /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex align-items-center mb-2", children: [
-      /* @__PURE__ */ Jr.jsx("label", { className: "mr-2", htmlFor: "font-size-input", children: "Font size" }),
-      /* @__PURE__ */ Jr.jsx(
+  return /* @__PURE__ */ Qr.jsxs("div", { style: { maxWidth: "800px" }, children: [
+    /* @__PURE__ */ Qr.jsx("h3", { className: "mb-2 h3", children: "Styling of Accordions" }),
+    /* @__PURE__ */ Qr.jsxs("div", { className: "d-flex align-items-center mb-2", children: [
+      /* @__PURE__ */ Qr.jsx("label", { className: "mr-2", htmlFor: "font-size-input", children: "Font size" }),
+      /* @__PURE__ */ Qr.jsx(
         "input",
         {
           id: "font-size-input",
@@ -19014,7 +19014,7 @@ function qEe({
         }
       )
     ] }),
-    /* @__PURE__ */ Jr.jsx(
+    /* @__PURE__ */ Qr.jsx(
       Xte,
       {
         label: "Background color",
@@ -19023,7 +19023,7 @@ function qEe({
         setColor: (u) => i({ backgroundColor: u })
       }
     ),
-    /* @__PURE__ */ Jr.jsx(
+    /* @__PURE__ */ Qr.jsx(
       Xte,
       {
         label: "Border color",
@@ -19032,7 +19032,7 @@ function qEe({
         setColor: (u) => i({ borderColor: u })
       }
     ),
-    /* @__PURE__ */ Jr.jsx(
+    /* @__PURE__ */ Qr.jsx(
       Xte,
       {
         label: "Text color",
@@ -46053,16 +46053,16 @@ Components: ` + JSON.stringify(a.components, null, 2));
         value: go,
         markers: t.markers,
         fakeFocus: t.fakeFocus,
-        onHighlight: (Os, Qr) => {
+        onHighlight: (Os, Jr) => {
           po(Os, RB, {
             menuComp: Os,
-            itemComp: Qr
+            itemComp: Jr
           });
         },
-        onDehighlight: (Os, Qr) => {
+        onDehighlight: (Os, Jr) => {
           po(Os, Od, {
             menuComp: Os,
-            itemComp: Qr
+            itemComp: Jr
           });
         },
         focusManager: t.fakeFocus ? FE() : ex()
@@ -46110,8 +46110,8 @@ Components: ` + JSON.stringify(a.components, null, 2));
         return B.none();
       {
         const Lo = go.menu, Os = q(Un, jo.slice(1));
-        return mt(Os, (Qr) => {
-          Us(Qr.element, t.markers.backgroundMenu);
+        return mt(Os, (Jr) => {
+          Us(Jr.element, t.markers.backgroundMenu);
         }), yr(Lo.element) || No.append(cn, Ll(Lo)), Gc(Lo.element, [t.markers.backgroundMenu]), H(cn, Lo), ne(cn, Un, jo), B.some(Lo);
       }
     }));
@@ -46131,8 +46131,8 @@ Components: ` + JSON.stringify(a.components, null, 2));
       {
         const So = w(Un);
         return g.expand(So).bind((go) => (fe(cn, go), B.from(go[0]).bind((Lo) => g.lookupMenu(Lo).bind((Os) => {
-          const Qr = De(cn, Lo, Os);
-          return yr(Qr.element) || No.append(cn, Ll(Qr)), t.onOpenSubmenu(cn, Un, Qr, mo(go)), jo === st.HighlightSubmenu ? (wn.highlightFirst(Qr), _e(cn, g, go)) : (wn.dehighlightAll(Qr), B.some(Un));
+          const Jr = De(cn, Lo, Os);
+          return yr(Jr.element) || No.append(cn, Ll(Jr)), t.onOpenSubmenu(cn, Un, Jr, mo(go)), jo === st.HighlightSubmenu ? (wn.highlightFirst(Jr), _e(cn, g, go)) : (wn.dehighlightAll(Jr), B.some(Un));
         }))));
       }
     }, Ge = (cn, Un) => {
@@ -46188,7 +46188,7 @@ Components: ` + JSON.stringify(a.components, null, 2));
       repositionMenus: (cn) => {
         g.getPrimary().bind((jo) => In(cn).bind((So) => {
           const go = w(So), Lo = Tr(g.getMenus()), Os = Ks(tt(Lo, DB.extractPreparedMenu));
-          return g.getTriggeringPath(go, (Qr) => T(cn, Os, Qr));
+          return g.getTriggeringPath(go, (Jr) => T(cn, Os, Jr));
         }).map((So) => ({
           primary: jo,
           triggeringPath: So
@@ -47728,7 +47728,7 @@ Components: ` + JSON.stringify(a.components, null, 2));
       ...qC,
       ...KC
     ]);
-    let Qr = Object.seal(Object.create(null, {
+    let Jr = Object.seal(Object.create(null, {
       tagNameCheck: {
         writable: !0,
         configurable: !1,
@@ -47819,7 +47819,7 @@ Components: ` + JSON.stringify(a.components, null, 2));
       return Et instanceof RegExp || Et instanceof Function;
     }, rte = function(Et) {
       if (!(UA && UA === Et)) {
-        if ((!Et || typeof Et != "object") && (Et = {}), Et = fx(Et), ck = $he.indexOf(Et.PARSER_MEDIA_TYPE) === -1 ? ck = Lhe : ck = Et.PARSER_MEDIA_TYPE, Tu = ck === "application/xhtml+xml" ? _D : uT, So = "ALLOWED_TAGS" in Et ? hs({}, Et.ALLOWED_TAGS, Tu) : go, Lo = "ALLOWED_ATTR" in Et ? hs({}, Et.ALLOWED_ATTR, Tu) : Os, ote = "ALLOWED_NAMESPACES" in Et ? hs({}, Et.ALLOWED_NAMESPACES, _D) : Bhe, tte = "ADD_URI_SAFE_ATTR" in Et ? hs(fx(Sie), Et.ADD_URI_SAFE_ATTR, Tu) : Sie, wie = "ADD_DATA_URI_TAGS" in Et ? hs(fx(Cie), Et.ADD_DATA_URI_TAGS, Tu) : Cie, VA = "FORBID_CONTENTS" in Et ? hs({}, Et.FORBID_CONTENTS, Tu) : xie, gc = "FORBID_TAGS" in Et ? hs({}, Et.FORBID_TAGS, Tu) : {}, Fd = "FORBID_ATTR" in Et ? hs({}, Et.FORBID_ATTR, Tu) : {}, zA = "USE_PROFILES" in Et ? Et.USE_PROFILES : !1, ep = Et.ALLOW_ARIA_ATTR !== !1, Wl = Et.ALLOW_DATA_ATTR !== !1, Bd = Et.ALLOW_UNKNOWN_PROTOCOLS || !1, _f = Et.ALLOW_SELF_CLOSE_IN_ATTR !== !1, Eu = Et.SAFE_FOR_TEMPLATES || !1, hh = Et.WHOLE_DOCUMENT || !1, tw = Et.RETURN_DOM || !1, HA = Et.RETURN_DOM_FRAGMENT || !1, u9 = Et.RETURN_TRUSTED_TYPE || !1, dI = Et.FORCE_BODY || !1, vie = Et.SANITIZE_DOM !== !1, yie = Et.SANITIZE_NAMED_PROPS || !1, ete = Et.KEEP_CONTENT !== !1, fI = Et.IN_PLACE || !1, jo = Et.ALLOWED_URI_REGEXP || c$, jA = Et.NAMESPACE || d0, Qr = Et.CUSTOM_ELEMENT_HANDLING || {}, Et.CUSTOM_ELEMENT_HANDLING && kie(Et.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (Qr.tagNameCheck = Et.CUSTOM_ELEMENT_HANDLING.tagNameCheck), Et.CUSTOM_ELEMENT_HANDLING && kie(Et.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (Qr.attributeNameCheck = Et.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), Et.CUSTOM_ELEMENT_HANDLING && typeof Et.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements == "boolean" && (Qr.allowCustomizedBuiltInElements = Et.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), Eu && (Wl = !1), HA && (tw = !0), zA && (So = hs({}, [...dT]), Lo = [], zA.html === !0 && (hs(So, i$), hs(Lo, PD)), zA.svg === !0 && (hs(So, ED), hs(Lo, GC), hs(Lo, KC)), zA.svgFilters === !0 && (hs(So, TD), hs(Lo, GC), hs(Lo, KC)), zA.mathMl === !0 && (hs(So, OD), hs(Lo, qC), hs(Lo, KC))), Et.ADD_TAGS && (So === go && (So = fx(So)), hs(So, Et.ADD_TAGS, Tu)), Et.ADD_ATTR && (Lo === Os && (Lo = fx(Lo)), hs(Lo, Et.ADD_ATTR, Tu)), Et.ADD_URI_SAFE_ATTR && hs(tte, Et.ADD_URI_SAFE_ATTR, Tu), Et.FORBID_CONTENTS && (VA === xie && (VA = fx(VA)), hs(VA, Et.FORBID_CONTENTS, Tu)), ete && (So["#text"] = !0), hh && hs(So, [
+        if ((!Et || typeof Et != "object") && (Et = {}), Et = fx(Et), ck = $he.indexOf(Et.PARSER_MEDIA_TYPE) === -1 ? ck = Lhe : ck = Et.PARSER_MEDIA_TYPE, Tu = ck === "application/xhtml+xml" ? _D : uT, So = "ALLOWED_TAGS" in Et ? hs({}, Et.ALLOWED_TAGS, Tu) : go, Lo = "ALLOWED_ATTR" in Et ? hs({}, Et.ALLOWED_ATTR, Tu) : Os, ote = "ALLOWED_NAMESPACES" in Et ? hs({}, Et.ALLOWED_NAMESPACES, _D) : Bhe, tte = "ADD_URI_SAFE_ATTR" in Et ? hs(fx(Sie), Et.ADD_URI_SAFE_ATTR, Tu) : Sie, wie = "ADD_DATA_URI_TAGS" in Et ? hs(fx(Cie), Et.ADD_DATA_URI_TAGS, Tu) : Cie, VA = "FORBID_CONTENTS" in Et ? hs({}, Et.FORBID_CONTENTS, Tu) : xie, gc = "FORBID_TAGS" in Et ? hs({}, Et.FORBID_TAGS, Tu) : {}, Fd = "FORBID_ATTR" in Et ? hs({}, Et.FORBID_ATTR, Tu) : {}, zA = "USE_PROFILES" in Et ? Et.USE_PROFILES : !1, ep = Et.ALLOW_ARIA_ATTR !== !1, Wl = Et.ALLOW_DATA_ATTR !== !1, Bd = Et.ALLOW_UNKNOWN_PROTOCOLS || !1, _f = Et.ALLOW_SELF_CLOSE_IN_ATTR !== !1, Eu = Et.SAFE_FOR_TEMPLATES || !1, hh = Et.WHOLE_DOCUMENT || !1, tw = Et.RETURN_DOM || !1, HA = Et.RETURN_DOM_FRAGMENT || !1, u9 = Et.RETURN_TRUSTED_TYPE || !1, dI = Et.FORCE_BODY || !1, vie = Et.SANITIZE_DOM !== !1, yie = Et.SANITIZE_NAMED_PROPS || !1, ete = Et.KEEP_CONTENT !== !1, fI = Et.IN_PLACE || !1, jo = Et.ALLOWED_URI_REGEXP || c$, jA = Et.NAMESPACE || d0, Jr = Et.CUSTOM_ELEMENT_HANDLING || {}, Et.CUSTOM_ELEMENT_HANDLING && kie(Et.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (Jr.tagNameCheck = Et.CUSTOM_ELEMENT_HANDLING.tagNameCheck), Et.CUSTOM_ELEMENT_HANDLING && kie(Et.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (Jr.attributeNameCheck = Et.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), Et.CUSTOM_ELEMENT_HANDLING && typeof Et.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements == "boolean" && (Jr.allowCustomizedBuiltInElements = Et.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), Eu && (Wl = !1), HA && (tw = !0), zA && (So = hs({}, [...dT]), Lo = [], zA.html === !0 && (hs(So, i$), hs(Lo, PD)), zA.svg === !0 && (hs(So, ED), hs(Lo, GC), hs(Lo, KC)), zA.svgFilters === !0 && (hs(So, TD), hs(Lo, GC), hs(Lo, KC)), zA.mathMl === !0 && (hs(So, OD), hs(Lo, qC), hs(Lo, KC))), Et.ADD_TAGS && (So === go && (So = fx(So)), hs(So, Et.ADD_TAGS, Tu)), Et.ADD_ATTR && (Lo === Os && (Lo = fx(Lo)), hs(Lo, Et.ADD_ATTR, Tu)), Et.ADD_URI_SAFE_ATTR && hs(tte, Et.ADD_URI_SAFE_ATTR, Tu), Et.FORBID_CONTENTS && (VA === xie && (VA = fx(VA)), hs(VA, Et.FORBID_CONTENTS, Tu)), ete && (So["#text"] = !0), hh && hs(So, [
           "html",
           "head",
           "body"
@@ -47937,7 +47937,7 @@ Components: ` + JSON.stringify(a.components, null, 2));
       }), Et.hasChildNodes() && !p9(Et.firstElementChild) && (!p9(Et.content) || !p9(Et.content.firstElementChild)) && mf(/<[/\w]/g, Et.innerHTML) && mf(/<[/\w]/g, Et.textContent))
         return uk(Et), !0;
       if (!So[Fo] || gc[Fo]) {
-        if (!gc[Fo] && Die(Fo) && (Qr.tagNameCheck instanceof RegExp && mf(Qr.tagNameCheck, Fo) || Qr.tagNameCheck instanceof Function && Qr.tagNameCheck(Fo)))
+        if (!gc[Fo] && Die(Fo) && (Jr.tagNameCheck instanceof RegExp && mf(Jr.tagNameCheck, Fo) || Jr.tagNameCheck instanceof Function && Jr.tagNameCheck(Fo)))
           return !1;
         if (ete && !VA[Fo]) {
           const hi = Je(Et) || Et.parentNode, Ou = De(Et) || Et.childNodes;
@@ -47956,7 +47956,7 @@ Components: ` + JSON.stringify(a.components, null, 2));
       if (!(Wl && !Fd[ao] && mf(Hr, ao))) {
         if (!(ep && mf(br, ao))) {
           if (!Lo[ao] || Fd[ao]) {
-            if (!(Die(Et) && (Qr.tagNameCheck instanceof RegExp && mf(Qr.tagNameCheck, Et) || Qr.tagNameCheck instanceof Function && Qr.tagNameCheck(Et)) && (Qr.attributeNameCheck instanceof RegExp && mf(Qr.attributeNameCheck, ao) || Qr.attributeNameCheck instanceof Function && Qr.attributeNameCheck(ao)) || ao === "is" && Qr.allowCustomizedBuiltInElements && (Qr.tagNameCheck instanceof RegExp && mf(Qr.tagNameCheck, Fo) || Qr.tagNameCheck instanceof Function && Qr.tagNameCheck(Fo)))) return !1;
+            if (!(Die(Et) && (Jr.tagNameCheck instanceof RegExp && mf(Jr.tagNameCheck, Et) || Jr.tagNameCheck instanceof Function && Jr.tagNameCheck(Et)) && (Jr.attributeNameCheck instanceof RegExp && mf(Jr.attributeNameCheck, ao) || Jr.attributeNameCheck instanceof Function && Jr.attributeNameCheck(ao)) || ao === "is" && Jr.allowCustomizedBuiltInElements && (Jr.tagNameCheck instanceof RegExp && mf(Jr.tagNameCheck, Fo) || Jr.tagNameCheck instanceof Function && Jr.tagNameCheck(Fo)))) return !1;
           } else if (!tte[ao]) {
             if (!mf(jo, Wm(Fo, Un, ""))) {
               if (!((ao === "src" || ao === "xlink:href" || ao === "href") && Et !== "script" && cW(Fo, "data:") === 0 && wie[Et])) {
@@ -58464,7 +58464,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
         const jo = Gs.getToolbar(x.outerContainer), So = Je(jo), go = aa(a), Lo = vn(t, x.outerContainer.element), Os = () => Lo.fold(() => go.x, (Wl) => {
           const Bd = aa(Wl);
           return Lr(Wl, Uo()) ? go.x : go.x - Bd.x;
-        }), Qr = () => Lo.fold(() => ne() ? Math.max(go.y - Bs(Un.element) + So, 0) : go.bottom, (Wl) => {
+        }), Jr = () => Lo.fold(() => ne() ? Math.max(go.y - Bs(Un.element) + So, 0) : go.bottom, (Wl) => {
           var Bd;
           const _f = aa(Wl), Eu = (Bd = Wl.dom.scrollTop) !== null && Bd !== void 0 ? Bd : 0, u0 = Lr(Wl, Uo()) ? Math.max(go.y - Bs(Un.element) + So, 0) : go.y - _f.y + Eu - Bs(Un.element) + So;
           return ne() ? u0 : go.bottom;
@@ -58474,7 +58474,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
         }).getOr({ width: "max-content" }), ep = {
           position: "absolute",
           left: Math.round(gc) + "px",
-          top: Qr() + "px"
+          top: Jr() + "px"
         };
         Rs(x.outerContainer.element, {
           ...ep,
@@ -60565,7 +60565,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
         lazyToolbar: Jt,
         lazyHeader: () => De().getOrDie("Could not find header element"),
         ...go
-      }), Qr = Gs.parts["multiple-toolbar"]({
+      }), Jr = Gs.parts["multiple-toolbar"]({
         dom: {
           tag: "div",
           classes: ["tox-toolbar-overlord"]
@@ -60575,7 +60575,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
           t.focus();
         },
         type: fe
-      }), gc = P1(t), Fd = rT(t), ep = nT(t), Wl = HC(t), Bd = In(), _f = gc || Fd || ep, Eu = () => gc ? [Qr] : Fd ? [Os] : [], hh = Wl ? [
+      }), gc = P1(t), Fd = rT(t), ep = nT(t), Wl = HC(t), Bd = In(), _f = gc || Fd || ep, Eu = () => gc ? [Jr] : Fd ? [Os] : [], hh = Wl ? [
         Bd,
         Lo
       ] : [Lo];
@@ -60633,12 +60633,12 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
           attributes: { ...Ad.isRtl() ? { dir: "rtl" } : {} }
         },
         behaviours: Qt([tl.config({ useFixed: () => g.isDocked(De) })])
-      }, Qr = {
+      }, Jr = {
         dom: { styles: { width: document.body.clientWidth + "px" } },
         events: js([It(tf(), (ep) => {
           Ln(ep.element, "width", document.body.clientWidth + "px");
         })])
-      }, gc = Al(Fs(Os, Lo ? Qr : {})), Fd = IR(gc);
+      }, gc = Al(Fs(Os, Lo ? Jr : {})), Fd = IR(gc);
       return T.set(Fd), {
         sink: gc,
         mothership: Fd
@@ -60671,7 +60671,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
           classes: ["tox-throbber"]
         },
         backstage: Nt.popup
-      }), Qr = Gs.parts.viewWrapper({ backstage: Nt.popup }), gc = qB(t) && !c ? B.some(oee(t, Nt.popup.shared.providers)) : B.none(), Fd = en([
+      }), Jr = Gs.parts.viewWrapper({ backstage: Nt.popup }), gc = qB(t) && !c ? B.some(oee(t, Nt.popup.shared.providers)) : B.none(), Fd = en([
         ie ? [] : [go],
         c ? [] : [Lo],
         ie ? [go] : []
@@ -60703,7 +60703,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
         components: [
           ep,
           ...c ? [] : [
-            Qr,
+            Jr,
             ...gc.toArray()
           ],
           Os
@@ -60733,7 +60733,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
         Os != null && Os.skipFocus ? Gs.toggleToolbarDrawerWithoutFocusing(go) : Gs.toggleToolbarDrawer(go);
       }), t.addQueryStateHandler("ToggleToolbarDrawer", () => Gs.isToolbarDrawerToggled(go));
     }, Un = (go) => {
-      const { mainUi: Lo, popupUi: Os, uiMotherships: Qr } = go;
+      const { mainUi: Lo, popupUi: Os, uiMotherships: Jr } = go;
       kt(XE(t), (tw, HA) => {
         t.ui.registry.addGroupToolbarButton(HA, tw);
       });
@@ -60747,7 +60747,7 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
         sidebar: Wl,
         views: Bd
       };
-      cn(Lo.outerContainer), vY(t, Lo.mothership, Qr), g.setup(t, Nt.popup.shared, De), oJ(t, Nt.popup), CJ(t, Nt.popup.shared.getSink, Nt.popup), IY(t), ZY(t, vn, Nt.popup.shared), HQ(t, ep, Os.sink, { backstage: Nt.popup }), KJ(t, Os.sink);
+      cn(Lo.outerContainer), vY(t, Lo.mothership, Jr), g.setup(t, Nt.popup.shared, De), oJ(t, Nt.popup), CJ(t, Nt.popup.shared.getSink, Nt.popup), IY(t), ZY(t, vn, Nt.popup.shared), HQ(t, ep, Os.sink, { backstage: Nt.popup }), KJ(t, Os.sink);
       const hh = t.getElement(), u0 = br(Lo.outerContainer), dI = {
         targetNode: hh,
         height: u0
@@ -60756,13 +60756,13 @@ The conflicting element is` + (yr(q.element) ? " " : " not ") + "already in the 
     }, jo = (go) => (A.set(go.mothership), go), So = () => {
       const go = Hr(), Lo = fo(), Os = qb(t) ? Gr() : jo(Lo);
       x.dialogUi.set(Lo), x.popupUi.set(Os), x.mainUi.set(go);
-      const Qr = {
+      const Jr = {
         popupUi: Os,
         dialogUi: Lo,
         mainUi: go,
         uiMotherships: x.getUiMotherships()
       };
-      return Un(Qr);
+      return Un(Jr);
     };
     return {
       popups: {
@@ -72067,7 +72067,7 @@ Required: ` + I.join(", "));
 tinymce.Resource.add("content/default/content.css", `body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;line-height:1.4;margin:1rem}table{border-collapse:collapse}table:not([cellpadding]) td,table:not([cellpadding]) th{padding:.4rem}table[border]:not([border="0"]):not([style*=border-width]) td,table[border]:not([border="0"]):not([style*=border-width]) th{border-width:1px}table[border]:not([border="0"]):not([style*=border-style]) td,table[border]:not([border="0"]):not([style*=border-style]) th{border-style:solid}table[border]:not([border="0"]):not([style*=border-color]) td,table[border]:not([border="0"]):not([style*=border-color]) th{border-color:#ccc}figure{display:table;margin:1rem auto}figure figcaption{color:#999;display:block;margin-top:.25rem;text-align:center}hr{border-color:#ccc;border-style:solid;border-width:1px 0 0 0}code{background-color:#e8e8e8;border-radius:3px;padding:.1rem .2rem}.mce-content-body:not([dir=rtl]) blockquote{border-left:2px solid #ccc;margin-left:1.5rem;padding-left:1rem}.mce-content-body[dir=rtl] blockquote{border-right:2px solid #ccc;margin-right:1.5rem;padding-right:1rem}`);
 tinymce.Resource.add("ui/default/content.css", `.mce-content-body .mce-item-anchor{background:transparent url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D'8'%20height%3D'12'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'M0%200L8%200%208%2012%204.09117821%209%200%2012z'%2F%3E%3C%2Fsvg%3E%0A") no-repeat center}.mce-content-body .mce-item-anchor:empty{cursor:default;display:inline-block;height:12px!important;padding:0 2px;-webkit-user-modify:read-only;-moz-user-modify:read-only;-webkit-user-select:all;-moz-user-select:all;user-select:all;width:8px!important}.mce-content-body .mce-item-anchor:not(:empty){background-position-x:2px;display:inline-block;padding-left:12px}.mce-content-body .mce-item-anchor[data-mce-selected]{outline-offset:1px}.tox-comments-visible .tox-comment[contenteditable=false]:not([data-mce-selected]),.tox-comments-visible span.tox-comment img:not([data-mce-selected]),.tox-comments-visible span.tox-comment span.mce-preview-object:not([data-mce-selected]),.tox-comments-visible span.tox-comment>audio:not([data-mce-selected]),.tox-comments-visible span.tox-comment>video:not([data-mce-selected]){outline:3px solid #ffe89d}.tox-comments-visible .tox-comment[contenteditable=false][data-mce-annotation-active=true]:not([data-mce-selected]){outline:3px solid #fed635}.tox-comments-visible span.tox-comment[data-mce-annotation-active=true] img:not([data-mce-selected]),.tox-comments-visible span.tox-comment[data-mce-annotation-active=true] span.mce-preview-object:not([data-mce-selected]),.tox-comments-visible span.tox-comment[data-mce-annotation-active=true]>audio:not([data-mce-selected]),.tox-comments-visible span.tox-comment[data-mce-annotation-active=true]>video:not([data-mce-selected]){outline:3px solid #fed635}.tox-comments-visible span.tox-comment:not([data-mce-selected]){background-color:#ffe89d;outline:0}.tox-comments-visible span.tox-comment[data-mce-annotation-active=true]:not([data-mce-selected=inline-boundary]){background-color:#fed635}.tox-checklist>li:not(.tox-checklist--hidden){list-style:none;margin:.25em 0}.tox-checklist>li:not(.tox-checklist--hidden)::before{content:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-unchecked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2215%22%20height%3D%2215%22%20x%3D%22.5%22%20y%3D%22.5%22%20fill-rule%3D%22nonzero%22%20stroke%3D%22%234C4C4C%22%20rx%3D%222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A");cursor:pointer;height:1em;margin-left:-1.5em;margin-top:.125em;position:absolute;width:1em}.tox-checklist li:not(.tox-checklist--hidden).tox-checklist--checked::before{content:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-checked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%234099FF%22%20fill-rule%3D%22nonzero%22%20rx%3D%222%22%2F%3E%3Cpath%20id%3D%22Path%22%20fill%3D%22%23FFF%22%20fill-rule%3D%22nonzero%22%20d%3D%22M11.5703186%2C3.14417309%20C11.8516238%2C2.73724603%2012.4164781%2C2.62829933%2012.83558%2C2.89774797%20C13.260121%2C3.17069355%2013.3759736%2C3.72932262%2013.0909105%2C4.14168582%20L7.7580587%2C11.8560195%20C7.43776896%2C12.3193404%206.76483983%2C12.3852142%206.35607322%2C11.9948725%20L3.02491697%2C8.8138662%20C2.66090143%2C8.46625845%202.65798871%2C7.89594698%203.01850234%2C7.54483354%20C3.373942%2C7.19866177%203.94940006%2C7.19592841%204.30829608%2C7.5386474%20L6.85276923%2C9.9684299%20L11.5703186%2C3.14417309%20Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A")}[dir=rtl] .tox-checklist>li:not(.tox-checklist--hidden)::before{margin-left:0;margin-right:-1.5em}code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;tab-size:4;-webkit-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.mce-content-body{overflow-wrap:break-word;word-wrap:break-word}.mce-content-body .mce-visual-caret{background-color:#000;background-color:currentColor;position:absolute}.mce-content-body .mce-visual-caret-hidden{display:none}.mce-content-body [data-mce-caret]{left:-1000px;margin:0;padding:0;position:absolute;right:auto;top:0}.mce-content-body .mce-offscreen-selection{left:-2000000px;max-width:1000000px;position:absolute}.mce-content-body [contentEditable=false]{cursor:default}.mce-content-body [contentEditable=true]{cursor:text}.tox-cursor-format-painter{cursor:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%20%20%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%3Cpath%20fill%3D%22%23000%22%20fill-rule%3D%22nonzero%22%20d%3D%22M15%2C6%20C15%2C5.45%2014.55%2C5%2014%2C5%20L6%2C5%20C5.45%2C5%205%2C5.45%205%2C6%20L5%2C10%20C5%2C10.55%205.45%2C11%206%2C11%20L14%2C11%20C14.55%2C11%2015%2C10.55%2015%2C10%20L15%2C9%20L16%2C9%20L16%2C12%20L9%2C12%20L9%2C19%20C9%2C19.55%209.45%2C20%2010%2C20%20L11%2C20%20C11.55%2C20%2012%2C19.55%2012%2C19%20L12%2C14%20L18%2C14%20L18%2C7%20L15%2C7%20L15%2C6%20Z%22%2F%3E%0A%20%20%20%20%3Cpath%20fill%3D%22%23000%22%20fill-rule%3D%22nonzero%22%20d%3D%22M1%2C1%20L8.25%2C1%20C8.66421356%2C1%209%2C1.33578644%209%2C1.75%20L9%2C1.75%20C9%2C2.16421356%208.66421356%2C2.5%208.25%2C2.5%20L2.5%2C2.5%20L2.5%2C8.25%20C2.5%2C8.66421356%202.16421356%2C9%201.75%2C9%20L1.75%2C9%20C1.33578644%2C9%201%2C8.66421356%201%2C8.25%20L1%2C1%20Z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A"),default}div.mce-footnotes hr{margin-inline-end:auto;margin-inline-start:0;width:25%}div.mce-footnotes li>a.mce-footnotes-backlink{text-decoration:none}@media print{sup.mce-footnote a{color:#000;text-decoration:none}div.mce-footnotes{break-inside:avoid;width:100%}div.mce-footnotes li>a.mce-footnotes-backlink{display:none}}tiny-math-block{display:flex;justify-content:center;margin:16px 0 16px 0}tiny-math-inline{display:inline-block}.mce-content-body figure.align-left{float:left}.mce-content-body figure.align-right{float:right}.mce-content-body figure.image.align-center{display:table;margin-left:auto;margin-right:auto}.mce-preview-object{border:1px solid gray;display:inline-block;line-height:0;margin:0 2px 0 2px;position:relative}.mce-preview-object .mce-shim{background:url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);height:100%;left:0;position:absolute;top:0;width:100%}.mce-preview-object[data-mce-selected="2"] .mce-shim{display:none}.mce-content-body .mce-mergetag{cursor:default!important;-webkit-user-select:none;-moz-user-select:none;user-select:none}.mce-content-body .mce-mergetag:hover{background-color:rgba(0,108,231,.1)}.mce-content-body .mce-mergetag-affix{background-color:rgba(0,108,231,.1);color:#006ce7}.mce-object{background:transparent url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M4%203h16a1%201%200%200%201%201%201v16a1%201%200%200%201-1%201H4a1%201%200%200%201-1-1V4a1%201%200%200%201%201-1zm1%202v14h14V5H5zm4.79%202.565l5.64%204.028a.5.5%200%200%201%200%20.814l-5.64%204.028a.5.5%200%200%201-.79-.407V7.972a.5.5%200%200%201%20.79-.407z%22%2F%3E%3C%2Fsvg%3E%0A") no-repeat center;border:1px dashed #aaa}.mce-pagebreak{border:1px dashed #aaa;cursor:default;display:block;height:5px;margin-top:15px;page-break-before:always;width:100%}@media print{.mce-pagebreak{border:0}}.tiny-pageembed .mce-shim{background:url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);height:100%;left:0;position:absolute;top:0;width:100%}.tiny-pageembed[data-mce-selected="2"] .mce-shim{display:none}.tiny-pageembed{display:inline-block;position:relative}.tiny-pageembed--16by9,.tiny-pageembed--1by1,.tiny-pageembed--21by9,.tiny-pageembed--4by3{display:block;overflow:hidden;padding:0;position:relative;width:100%}.tiny-pageembed--21by9{padding-top:42.857143%}.tiny-pageembed--16by9{padding-top:56.25%}.tiny-pageembed--4by3{padding-top:75%}.tiny-pageembed--1by1{padding-top:100%}.tiny-pageembed--16by9 iframe,.tiny-pageembed--1by1 iframe,.tiny-pageembed--21by9 iframe,.tiny-pageembed--4by3 iframe{border:0;height:100%;left:0;position:absolute;top:0;width:100%}.mce-content-body[data-mce-placeholder]{position:relative}.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before{color:rgba(34,47,62,.7);content:attr(data-mce-placeholder);position:absolute}@media (forced-colors:active){.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before{color:highlight;filter:brightness(30%);z-index:-1}}.mce-content-body:not([dir=rtl])[data-mce-placeholder]:not(.mce-visualblocks)::before{left:1px}.mce-content-body[dir=rtl][data-mce-placeholder]:not(.mce-visualblocks)::before{right:1px}.mce-content-body div.mce-resizehandle{background-color:#4099ff;border-color:#4099ff;border-style:solid;border-width:1px;box-sizing:border-box;height:10px;position:absolute;width:10px;z-index:1298}.mce-content-body div.mce-resizehandle:hover{background-color:#4099ff}.mce-content-body div.mce-resizehandle:nth-of-type(1){cursor:nwse-resize}.mce-content-body div.mce-resizehandle:nth-of-type(2){cursor:nesw-resize}.mce-content-body div.mce-resizehandle:nth-of-type(3){cursor:nwse-resize}.mce-content-body div.mce-resizehandle:nth-of-type(4){cursor:nesw-resize}.mce-content-body .mce-resize-backdrop{z-index:10000}.mce-content-body .mce-clonedresizable{cursor:default;opacity:.5;outline:1px dashed #000;position:absolute;z-index:10001}.mce-content-body .mce-clonedresizable.mce-resizetable-columns td,.mce-content-body .mce-clonedresizable.mce-resizetable-columns th{border:0}.mce-content-body .mce-resize-helper{background:#555;background:rgba(0,0,0,.75);border:1px;border-radius:3px;color:#fff;display:none;font-family:sans-serif;font-size:12px;line-height:14px;margin:5px 10px;padding:5px;position:absolute;white-space:nowrap;z-index:10002}.tox-rtc-user-selection{position:relative}.tox-rtc-user-cursor{bottom:0;cursor:default;position:absolute;top:0;width:2px}.tox-rtc-user-cursor::before{background-color:inherit;border-radius:50%;content:'';display:block;height:8px;position:absolute;right:-3px;top:-3px;width:8px}.tox-rtc-user-cursor:hover::after{background-color:inherit;border-radius:100px;box-sizing:border-box;color:#fff;content:attr(data-user);display:block;font-size:12px;font-weight:700;left:-5px;min-height:8px;min-width:8px;padding:0 12px;position:absolute;top:-11px;white-space:nowrap;z-index:1000}.tox-rtc-user-selection--1 .tox-rtc-user-cursor{background-color:#2dc26b}.tox-rtc-user-selection--2 .tox-rtc-user-cursor{background-color:#e03e2d}.tox-rtc-user-selection--3 .tox-rtc-user-cursor{background-color:#f1c40f}.tox-rtc-user-selection--4 .tox-rtc-user-cursor{background-color:#3598db}.tox-rtc-user-selection--5 .tox-rtc-user-cursor{background-color:#b96ad9}.tox-rtc-user-selection--6 .tox-rtc-user-cursor{background-color:#e67e23}.tox-rtc-user-selection--7 .tox-rtc-user-cursor{background-color:#aaa69d}.tox-rtc-user-selection--8 .tox-rtc-user-cursor{background-color:#f368e0}.tox-rtc-remote-image{background:#eaeaea url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2236%22%20height%3D%2212%22%20viewBox%3D%220%200%2036%2012%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%223%22%20fill%3D%22rgba(0%2C%200%2C%200%2C%20.2)%22%3E%0A%20%20%20%20%3Canimate%20attributeName%3D%22r%22%20values%3D%223%3B5%3B3%22%20calcMode%3D%22linear%22%20dur%3D%221s%22%20repeatCount%3D%22indefinite%22%20%2F%3E%0A%20%20%3C%2Fcircle%3E%0A%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%226%22%20r%3D%223%22%20fill%3D%22rgba(0%2C%200%2C%200%2C%20.2)%22%3E%0A%20%20%20%20%3Canimate%20attributeName%3D%22r%22%20values%3D%223%3B5%3B3%22%20calcMode%3D%22linear%22%20begin%3D%22.33s%22%20dur%3D%221s%22%20repeatCount%3D%22indefinite%22%20%2F%3E%0A%20%20%3C%2Fcircle%3E%0A%20%20%3Ccircle%20cx%3D%2230%22%20cy%3D%226%22%20r%3D%223%22%20fill%3D%22rgba(0%2C%200%2C%200%2C%20.2)%22%3E%0A%20%20%20%20%3Canimate%20attributeName%3D%22r%22%20values%3D%223%3B5%3B3%22%20calcMode%3D%22linear%22%20begin%3D%22.66s%22%20dur%3D%221s%22%20repeatCount%3D%22indefinite%22%20%2F%3E%0A%20%20%3C%2Fcircle%3E%0A%3C%2Fsvg%3E%0A") no-repeat center center;border:1px solid #ccc;min-height:240px;min-width:320px}.mce-match-marker{background:#aaa;color:#fff}.mce-match-marker-selected{background:#39f;color:#fff}.mce-match-marker-selected::-moz-selection{background:#39f;color:#fff}.mce-match-marker-selected::selection{background:#39f;color:#fff}.mce-content-body audio[data-mce-selected],.mce-content-body details[data-mce-selected],.mce-content-body embed[data-mce-selected],.mce-content-body img[data-mce-selected],.mce-content-body object[data-mce-selected],.mce-content-body table[data-mce-selected],.mce-content-body video[data-mce-selected]{outline:3px solid #b4d7ff}.mce-content-body hr[data-mce-selected]{outline:3px solid #b4d7ff;outline-offset:1px}.mce-content-body [contentEditable=false] [contentEditable=true]:focus{outline:3px solid #b4d7ff}.mce-content-body [contentEditable=false] [contentEditable=true]:hover{outline:3px solid #b4d7ff}.mce-content-body [contentEditable=false][data-mce-selected]{cursor:not-allowed;outline:3px solid #b4d7ff}.mce-content-body.mce-content-readonly [contentEditable=true]:focus,.mce-content-body.mce-content-readonly [contentEditable=true]:hover{outline:0}.mce-content-body [data-mce-selected=inline-boundary]{background-color:#b4d7ff}.mce-content-body .mce-edit-focus{outline:3px solid #b4d7ff}.mce-content-body td[data-mce-selected],.mce-content-body th[data-mce-selected]{position:relative}.mce-content-body td[data-mce-selected]::-moz-selection,.mce-content-body th[data-mce-selected]::-moz-selection{background:0 0}.mce-content-body td[data-mce-selected]::selection,.mce-content-body th[data-mce-selected]::selection{background:0 0}.mce-content-body td[data-mce-selected] *,.mce-content-body th[data-mce-selected] *{outline:0;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.mce-content-body td[data-mce-selected]::after,.mce-content-body th[data-mce-selected]::after{background-color:rgba(180,215,255,.7);border:1px solid rgba(180,215,255,.7);bottom:-1px;content:'';left:-1px;mix-blend-mode:multiply;position:absolute;right:-1px;top:-1px}@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){.mce-content-body td[data-mce-selected]::after,.mce-content-body th[data-mce-selected]::after{border-color:rgba(0,84,180,.7)}}.mce-content-body img[data-mce-selected]::-moz-selection{background:0 0}.mce-content-body img[data-mce-selected]::selection{background:0 0}.ephox-snooker-resizer-bar{background-color:#b4d7ff;opacity:0;-webkit-user-select:none;-moz-user-select:none;user-select:none}.ephox-snooker-resizer-cols{cursor:col-resize}.ephox-snooker-resizer-rows{cursor:row-resize}.ephox-snooker-resizer-bar.ephox-snooker-resizer-bar-dragging{opacity:1}.mce-spellchecker-word{background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D'4'%20height%3D'4'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20stroke%3D'%23ff0000'%20fill%3D'none'%20stroke-linecap%3D'round'%20stroke-opacity%3D'.75'%20d%3D'M0%203L2%201%204%203'%2F%3E%3C%2Fsvg%3E%0A");background-position:0 calc(100% + 1px);background-repeat:repeat-x;background-size:auto 6px;cursor:default;height:2rem}.mce-spellchecker-grammar{background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D'4'%20height%3D'4'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20stroke%3D'%2300A835'%20fill%3D'none'%20stroke-linecap%3D'round'%20d%3D'M0%203L2%201%204%203'%2F%3E%3C%2Fsvg%3E%0A");background-position:0 calc(100% + 1px);background-repeat:repeat-x;background-size:auto 6px;cursor:default}.mce-toc{border:1px solid gray}.mce-toc h2{margin:4px}.mce-toc ul>li{list-style-type:none}[data-mce-block]{display:block}.mce-item-table:not([border]),.mce-item-table:not([border]) caption,.mce-item-table:not([border]) td,.mce-item-table:not([border]) th,.mce-item-table[border="0"],.mce-item-table[border="0"] caption,.mce-item-table[border="0"] td,.mce-item-table[border="0"] th,table[style*="border-width: 0px"],table[style*="border-width: 0px"] caption,table[style*="border-width: 0px"] td,table[style*="border-width: 0px"] th{border:1px dashed #bbb}.mce-visualblocks address,.mce-visualblocks article,.mce-visualblocks aside,.mce-visualblocks blockquote,.mce-visualblocks div:not([data-mce-bogus]),.mce-visualblocks dl,.mce-visualblocks figcaption,.mce-visualblocks figure,.mce-visualblocks h1,.mce-visualblocks h2,.mce-visualblocks h3,.mce-visualblocks h4,.mce-visualblocks h5,.mce-visualblocks h6,.mce-visualblocks hgroup,.mce-visualblocks ol,.mce-visualblocks p,.mce-visualblocks pre,.mce-visualblocks section,.mce-visualblocks ul{background-repeat:no-repeat;border:1px dashed #bbb;margin-left:3px;padding-top:10px}.mce-visualblocks p{background-image:url(data:image/gif;base64,R0lGODlhCQAJAJEAAAAAAP///7u7u////yH5BAEAAAMALAAAAAAJAAkAAAIQnG+CqCN/mlyvsRUpThG6AgA7)}.mce-visualblocks h1{background-image:url(data:image/gif;base64,R0lGODlhDQAKAIABALu7u////yH5BAEAAAEALAAAAAANAAoAAAIXjI8GybGu1JuxHoAfRNRW3TWXyF2YiRUAOw==)}.mce-visualblocks h2{background-image:url(data:image/gif;base64,R0lGODlhDgAKAIABALu7u////yH5BAEAAAEALAAAAAAOAAoAAAIajI8Hybbx4oOuqgTynJd6bGlWg3DkJzoaUAAAOw==)}.mce-visualblocks h3{background-image:url(data:image/gif;base64,R0lGODlhDgAKAIABALu7u////yH5BAEAAAEALAAAAAAOAAoAAAIZjI8Hybbx4oOuqgTynJf2Ln2NOHpQpmhAAQA7)}.mce-visualblocks h4{background-image:url(data:image/gif;base64,R0lGODlhDgAKAIABALu7u////yH5BAEAAAEALAAAAAAOAAoAAAIajI8HybbxInR0zqeAdhtJlXwV1oCll2HaWgAAOw==)}.mce-visualblocks h5{background-image:url(data:image/gif;base64,R0lGODlhDgAKAIABALu7u////yH5BAEAAAEALAAAAAAOAAoAAAIajI8HybbxIoiuwjane4iq5GlW05GgIkIZUAAAOw==)}.mce-visualblocks h6{background-image:url(data:image/gif;base64,R0lGODlhDgAKAIABALu7u////yH5BAEAAAEALAAAAAAOAAoAAAIajI8HybbxIoiuwjan04jep1iZ1XRlAo5bVgAAOw==)}.mce-visualblocks div:not([data-mce-bogus]){background-image:url(data:image/gif;base64,R0lGODlhEgAKAIABALu7u////yH5BAEAAAEALAAAAAASAAoAAAIfjI9poI0cgDywrhuxfbrzDEbQM2Ei5aRjmoySW4pAAQA7)}.mce-visualblocks section{background-image:url(data:image/gif;base64,R0lGODlhKAAKAIABALu7u////yH5BAEAAAEALAAAAAAoAAoAAAI5jI+pywcNY3sBWHdNrplytD2ellDeSVbp+GmWqaDqDMepc8t17Y4vBsK5hDyJMcI6KkuYU+jpjLoKADs=)}.mce-visualblocks article{background-image:url(data:image/gif;base64,R0lGODlhKgAKAIABALu7u////yH5BAEAAAEALAAAAAAqAAoAAAI6jI+pywkNY3wG0GBvrsd2tXGYSGnfiF7ikpXemTpOiJScasYoDJJrjsG9gkCJ0ag6KhmaIe3pjDYBBQA7)}.mce-visualblocks blockquote{background-image:url(data:image/gif;base64,R0lGODlhPgAKAIABALu7u////yH5BAEAAAEALAAAAAA+AAoAAAJPjI+py+0Knpz0xQDyuUhvfoGgIX5iSKZYgq5uNL5q69asZ8s5rrf0yZmpNkJZzFesBTu8TOlDVAabUyatguVhWduud3EyiUk45xhTTgMBBQA7)}.mce-visualblocks address{background-image:url(data:image/gif;base64,R0lGODlhLQAKAIABALu7u////yH5BAEAAAEALAAAAAAtAAoAAAI/jI+pywwNozSP1gDyyZcjb3UaRpXkWaXmZW4OqKLhBmLs+K263DkJK7OJeifh7FicKD9A1/IpGdKkyFpNmCkAADs=)}.mce-visualblocks pre{background-image:url(data:image/gif;base64,R0lGODlhFQAKAIABALu7uwAAACH5BAEAAAEALAAAAAAVAAoAAAIjjI+ZoN0cgDwSmnpz1NCueYERhnibZVKLNnbOq8IvKpJtVQAAOw==)}.mce-visualblocks figure{background-image:url(data:image/gif;base64,R0lGODlhJAAKAIAAALu7u////yH5BAEAAAEALAAAAAAkAAoAAAI0jI+py+2fwAHUSFvD3RlvG4HIp4nX5JFSpnZUJ6LlrM52OE7uSWosBHScgkSZj7dDKnWAAgA7)}.mce-visualblocks figcaption{border:1px dashed #bbb}.mce-visualblocks hgroup{background-image:url(data:image/gif;base64,R0lGODlhJwAKAIABALu7uwAAACH5BAEAAAEALAAAAAAnAAoAAAI3jI+pywYNI3uB0gpsRtt5fFnfNZaVSYJil4Wo03Hv6Z62uOCgiXH1kZIIJ8NiIxRrAZNMZAtQAAA7)}.mce-visualblocks aside{background-image:url(data:image/gif;base64,R0lGODlhHgAKAIABAKqqqv///yH5BAEAAAEALAAAAAAeAAoAAAItjI+pG8APjZOTzgtqy7I3f1yehmQcFY4WKZbqByutmW4aHUd6vfcVbgudgpYCADs=)}.mce-visualblocks ul{background-image:url(data:image/gif;base64,R0lGODlhDQAKAIAAALu7u////yH5BAEAAAEALAAAAAANAAoAAAIXjI8GybGuYnqUVSjvw26DzzXiqIDlVwAAOw==)}.mce-visualblocks ol{background-image:url(data:image/gif;base64,R0lGODlhDQAKAIABALu7u////yH5BAEAAAEALAAAAAANAAoAAAIXjI8GybH6HHt0qourxC6CvzXieHyeWQAAOw==)}.mce-visualblocks dl{background-image:url(data:image/gif;base64,R0lGODlhDQAKAIABALu7u////yH5BAEAAAEALAAAAAANAAoAAAIXjI8GybEOnmOvUoWznTqeuEjNSCqeGRUAOw==)}.mce-visualblocks:not([dir=rtl]) address,.mce-visualblocks:not([dir=rtl]) article,.mce-visualblocks:not([dir=rtl]) aside,.mce-visualblocks:not([dir=rtl]) blockquote,.mce-visualblocks:not([dir=rtl]) div:not([data-mce-bogus]),.mce-visualblocks:not([dir=rtl]) dl,.mce-visualblocks:not([dir=rtl]) figcaption,.mce-visualblocks:not([dir=rtl]) figure,.mce-visualblocks:not([dir=rtl]) h1,.mce-visualblocks:not([dir=rtl]) h2,.mce-visualblocks:not([dir=rtl]) h3,.mce-visualblocks:not([dir=rtl]) h4,.mce-visualblocks:not([dir=rtl]) h5,.mce-visualblocks:not([dir=rtl]) h6,.mce-visualblocks:not([dir=rtl]) hgroup,.mce-visualblocks:not([dir=rtl]) ol,.mce-visualblocks:not([dir=rtl]) p,.mce-visualblocks:not([dir=rtl]) pre,.mce-visualblocks:not([dir=rtl]) section,.mce-visualblocks:not([dir=rtl]) ul{margin-left:3px}.mce-visualblocks[dir=rtl] address,.mce-visualblocks[dir=rtl] article,.mce-visualblocks[dir=rtl] aside,.mce-visualblocks[dir=rtl] blockquote,.mce-visualblocks[dir=rtl] div:not([data-mce-bogus]),.mce-visualblocks[dir=rtl] dl,.mce-visualblocks[dir=rtl] figcaption,.mce-visualblocks[dir=rtl] figure,.mce-visualblocks[dir=rtl] h1,.mce-visualblocks[dir=rtl] h2,.mce-visualblocks[dir=rtl] h3,.mce-visualblocks[dir=rtl] h4,.mce-visualblocks[dir=rtl] h5,.mce-visualblocks[dir=rtl] h6,.mce-visualblocks[dir=rtl] hgroup,.mce-visualblocks[dir=rtl] ol,.mce-visualblocks[dir=rtl] p,.mce-visualblocks[dir=rtl] pre,.mce-visualblocks[dir=rtl] section,.mce-visualblocks[dir=rtl] ul{background-position-x:right;margin-right:3px}.mce-nbsp,.mce-shy{background:#aaa}.mce-shy::after{content:'-'}body{font-family:sans-serif}table{border-collapse:collapse}`);
 function lTe({ value: o, onChange: r }) {
-  return /* @__PURE__ */ Jr.jsx(
+  return /* @__PURE__ */ Qr.jsx(
     aTe,
     {
       licenseKey: "gpl",
@@ -72112,10 +72112,10 @@ function cTe({ panels: o, setPanels: r }) {
     const L = o.filter((U, se) => se !== D);
     r(L), L.length === 0 ? u(null) : D >= L.length ? u(L.length - 1) : u(D);
   };
-  return /* @__PURE__ */ Jr.jsxs(Jr.Fragment, { children: [
-    /* @__PURE__ */ Jr.jsx("div", { className: "d-flex justify-content-end", children: /* @__PURE__ */ Jr.jsx(yw, { iconBefore: _we, onClick: h, children: "Add Accordion" }) }),
-    /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex flex-row mx-2", children: [
-      /* @__PURE__ */ Jr.jsx("div", { className: "d-flex flex-column mr-2", style: { flexGrow: 1, width: "25%" }, children: o.map((D, L) => /* @__PURE__ */ Jr.jsx(
+  return /* @__PURE__ */ Qr.jsxs(Qr.Fragment, { children: [
+    /* @__PURE__ */ Qr.jsx("div", { className: "d-flex justify-content-end", children: /* @__PURE__ */ Qr.jsx(yw, { iconBefore: _we, onClick: h, children: "Add Accordion" }) }),
+    /* @__PURE__ */ Qr.jsxs("div", { className: "d-flex flex-row mx-2", children: [
+      /* @__PURE__ */ Qr.jsx("div", { className: "d-flex flex-column mr-2", style: { flexGrow: 1, width: "25%" }, children: o.map((D, L) => /* @__PURE__ */ Qr.jsx(
         yw,
         {
           draggable: !0,
@@ -72138,10 +72138,10 @@ function cTe({ panels: o, setPanels: r }) {
         },
         `${D.title}-${L}`
       )) }),
-      /* @__PURE__ */ Jr.jsx("div", { className: "d-flex flex-column", style: { flexGrow: 3 }, children: i !== null && o[i] && /* @__PURE__ */ Jr.jsxs(Jr.Fragment, { children: [
-        /* @__PURE__ */ Jr.jsxs("div", { className: "mb-2 d-flex flex-column", children: [
-          /* @__PURE__ */ Jr.jsx("label", { className: "mb-2", htmlFor: "accordion-title", children: "Title" }),
-          /* @__PURE__ */ Jr.jsx(
+      /* @__PURE__ */ Qr.jsx("div", { className: "d-flex flex-column", style: { flexGrow: 3 }, children: i !== null && o[i] && /* @__PURE__ */ Qr.jsxs(Qr.Fragment, { children: [
+        /* @__PURE__ */ Qr.jsxs("div", { className: "mb-2 d-flex flex-column", children: [
+          /* @__PURE__ */ Qr.jsx("label", { className: "mb-2", htmlFor: "accordion-title", children: "Title" }),
+          /* @__PURE__ */ Qr.jsx(
             "input",
             {
               id: "accordion-title",
@@ -72151,9 +72151,9 @@ function cTe({ panels: o, setPanels: r }) {
             }
           )
         ] }),
-        /* @__PURE__ */ Jr.jsxs("div", { children: [
-          /* @__PURE__ */ Jr.jsx("span", { className: "mb-2", children: "Content" }),
-          /* @__PURE__ */ Jr.jsx(
+        /* @__PURE__ */ Qr.jsxs("div", { children: [
+          /* @__PURE__ */ Qr.jsx("span", { className: "mb-2", children: "Content" }),
+          /* @__PURE__ */ Qr.jsx(
             lTe,
             {
               value: o[i].contents,
@@ -72161,7 +72161,7 @@ function cTe({ panels: o, setPanels: r }) {
             }
           )
         ] }),
-        /* @__PURE__ */ Jr.jsx("div", { className: "mt-3", children: /* @__PURE__ */ Jr.jsx(
+        /* @__PURE__ */ Qr.jsx("div", { className: "mt-3", children: /* @__PURE__ */ Qr.jsx(
           yw,
           {
             variant: "danger",
@@ -72174,7 +72174,7 @@ function cTe({ panels: o, setPanels: r }) {
   ] });
 }
 function ene({ className: o, onClick: r, label: i }) {
-  return /* @__PURE__ */ Jr.jsx("li", { className: "action-item", children: /* @__PURE__ */ Jr.jsx(
+  return /* @__PURE__ */ Qr.jsx("li", { className: "action-item", children: /* @__PURE__ */ Qr.jsx(
     "a",
     {
       href: "#",
@@ -72200,13 +72200,13 @@ function uTe({
       u.notify("error", { title: "Save Error", message: "Failed to save accordion configuration" });
     });
   };
-  return /* @__PURE__ */ Jr.jsx("div", { className: "xblock-accordion xblock--accordion--editor editor-with-buttons", children: /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex flex-column", style: { height: "375px" }, children: [
-    /* @__PURE__ */ Jr.jsxs("div", { className: "d-flex flex-column overflow-auto m-2.5", children: [
-      h === 0 && /* @__PURE__ */ Jr.jsx(qEe, { styling: k, setStyling: E }),
-      h === 1 && /* @__PURE__ */ Jr.jsx(cTe, { panels: D, setPanels: L })
-    ] }),
-    /* @__PURE__ */ Jr.jsx("div", { className: "xblock-actions", children: /* @__PURE__ */ Jr.jsxs("ul", { className: "action-buttons", children: [
-      h === 0 ? /* @__PURE__ */ Jr.jsx(
+  return /* @__PURE__ */ Qr.jsx("div", { className: "xblock-accordion xblock--accordion--editor editor-with-buttons", children: /* @__PURE__ */ Qr.jsxs("div", { className: "d-flex flex-column", style: { height: "375px" }, children: [
+    /* @__PURE__ */ Qr.jsx("div", { className: "d-flex flex-column overflow-auto m-2.5", style: { minHeight: "300px", scrollBehavior: "auto" }, children: /* @__PURE__ */ Qr.jsxs("div", { style: { minHeight: "300px" }, children: [
+      h === 0 && /* @__PURE__ */ Qr.jsx(qEe, { styling: k, setStyling: E }),
+      h === 1 && /* @__PURE__ */ Qr.jsx(cTe, { panels: D, setPanels: L })
+    ] }) }),
+    /* @__PURE__ */ Qr.jsx("div", { className: "xblock-actions", children: /* @__PURE__ */ Qr.jsxs("ul", { className: "action-buttons", children: [
+      h === 0 ? /* @__PURE__ */ Qr.jsx(
         ene,
         {
           onClick: () => y(
@@ -72216,7 +72216,7 @@ function uTe({
           className: "continue-button",
           label: "Continue"
         }
-      ) : /* @__PURE__ */ Jr.jsx(
+      ) : /* @__PURE__ */ Qr.jsx(
         ene,
         {
           onClick: () => y(
@@ -72227,7 +72227,7 @@ function uTe({
           label: "Back"
         }
       ),
-      /* @__PURE__ */ Jr.jsx(
+      /* @__PURE__ */ Qr.jsx(
         ene,
         {
           onClick: U,
@@ -72235,7 +72235,7 @@ function uTe({
           label: "Save"
         }
       ),
-      /* @__PURE__ */ Jr.jsx("li", { className: "action-item", children: /* @__PURE__ */ Jr.jsx(
+      /* @__PURE__ */ Qr.jsx("li", { className: "action-item", children: /* @__PURE__ */ Qr.jsx(
         "a",
         {
           href: "#",
@@ -72258,7 +72258,7 @@ const mTe = (o, r, {
   }
   const y = o.handlerUrl(h, "studio_save");
   Ure.render(
-    /* @__PURE__ */ Jr.jsx(et.StrictMode, { children: /* @__PURE__ */ Jr.jsx(
+    /* @__PURE__ */ Qr.jsx(et.StrictMode, { children: /* @__PURE__ */ Qr.jsx(
       uTe,
       {
         initialPanels: i,
