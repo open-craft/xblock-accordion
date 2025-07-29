@@ -46,7 +46,7 @@ export default function StudioUi({
         runtime.notify('save', { state: 'end' });
       })
       .fail(() => {
-        runtime.notify('error', { title: "Save Error", message: "Failed to save accordion configuration" });
+        runtime.notify('error', { title: 'Save Error', message: 'Failed to save accordion configuration' });
       });
   };
   return (

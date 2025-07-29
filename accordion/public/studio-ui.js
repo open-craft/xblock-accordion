@@ -72251,18 +72251,23 @@ const mTe = (o, r, {
   panels: i,
   styling: u
 }) => {
-  const h = o.handlerUrl(r, "studio_save");
+  const h = r && "jquery" in r ? r[0] : r;
+  if (!h || !(h instanceof Element)) {
+    console.error("Invalid DOM element provided to renderEditor:", r);
+    return;
+  }
+  const y = o.handlerUrl(h, "studio_save");
   Ure.render(
     /* @__PURE__ */ Jr.jsx(et.StrictMode, { children: /* @__PURE__ */ Jr.jsx(
       uTe,
       {
         initialPanels: i,
         initialStyling: u,
-        studioSaveUrl: h,
+        studioSaveUrl: y,
         runtime: o
       }
     ) }),
-    r
+    h
   );
 };
 export {
