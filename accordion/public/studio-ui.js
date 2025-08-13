@@ -72179,7 +72179,9 @@ function ene({ className: o, onClick: r, label: i }) {
     {
       href: "#",
       className: `button action-primary ${o}`,
-      onClick: r,
+      onClick: (u) => {
+        u.preventDefault(), u.stopPropagation(), r();
+      },
       children: i
     }
   ) });
@@ -72240,7 +72242,9 @@ function uTe({
         {
           href: "#",
           className: "button cancel-button",
-          onClick: () => u.notify("cancel", {}),
+          onClick: (se) => {
+            se.preventDefault(), se.stopPropagation(), u.notify("cancel", {});
+          },
           children: "Cancel"
         }
       ) })

@@ -15,17 +15,17 @@ interface StudioUiProps {
 
 interface ActionButtonLinkProps {
   className: string
-  onClick: ()=>void
-  label:string
+  onClick: () => void
+  label: string
 }
-function ActionButtonLink({ className, onClick, label }:ActionButtonLinkProps) {
+function ActionButtonLink({ className, onClick, label }: ActionButtonLinkProps) {
   return (
     <li className="action-item">
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a
         href="#"
         className={`button action-primary ${className}`}
-        onClick={onClick}
+        onClick={(e) => { e.preventDefault(); e.stopPropagation(); onClick(); }}
       >
         {label}
       </a>
@@ -88,7 +88,7 @@ export default function StudioUi({
               <a
                 href="#"
                 className="button cancel-button"
-                onClick={() => runtime.notify('cancel', {})}
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); runtime.notify('cancel', {}); }}
               >Cancel
               </a>
             </li>
