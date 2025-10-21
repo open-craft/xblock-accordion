@@ -19,6 +19,27 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
     Object.assign(newPanels[idx], change);
     setPanels(newPanels);
   };
+  // reorder panels by dragging
+  const movePanel = (from: number, to: number) => {
+    const newPanels = [...panels];
+    const [moved] = newPanels.splice(from, 1);
+    newPanels.splice(to, 0, moved);
+    setPanels(newPanels);
+    setSelectedPanel(to);
+  };
+  // remove a panel by index
+  const deletePanel = (idx: number) => {
+    const newPanels = panels.filter((_, i) => i !== idx);
+    setPanels(newPanels);
+    // adjust selected panel: choose next or previous
+    if (newPanels.length === 0) {
+      setSelectedPanel(null);
+    } else if (idx >= newPanels.length) {
+      setSelectedPanel(newPanels.length - 1);
+    } else {
+      setSelectedPanel(idx);
+    }
+  };
   return (
     <>
       <div className="d-flex justify-content-end">
@@ -28,6 +49,19 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
         <div className="d-flex flex-column mr-2" style={{ flexGrow: 1, width: '25%' }}>
           {panels.map((panel, idx) => (
             <Button
+              draggable
+              onDragStart={e => {
+                e.dataTransfer.setData('text/plain', String(idx));
+                e.dataTransfer.effectAllowed = 'move';
+              }}
+              onDragOver={e => {
+                e.preventDefault();
+              }}
+              onDrop={e => {
+                e.preventDefault();
+                const from = parseInt(e.dataTransfer.getData('text/plain'), 10);
+                movePanel(from, idx);
+              }}
               className="justify-content-start font-weight-bold p-2 rounded-0"
               key={`${panel.title}-${idx}`} // eslint-disable-line react/no-array-index-key
               variant={selectedPanel === idx ? 'light' : 'outline'}
@@ -56,6 +90,14 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
                 value={panels[selectedPanel].contents}
                 onChange={(val) => updatePanel(selectedPanel, { contents: val })}
               />
+            </div>
+            <div className="mt-3">
+              <Button
+                variant="danger"
+                onClick={() => deletePanel(selectedPanel)}
+              >
+                Delete
+              </Button>
             </div>
           </>
           )}

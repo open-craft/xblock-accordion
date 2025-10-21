@@ -15,17 +15,17 @@ interface StudioUiProps {
 
 interface ActionButtonLinkProps {
   className: string
-  onClick: ()=>void
-  label:string
+  onClick: () => void
+  label: string
 }
-function ActionButtonLink({ className, onClick, label }:ActionButtonLinkProps) {
+function ActionButtonLink({ className, onClick, label }: ActionButtonLinkProps) {
   return (
     <li className="action-item">
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a
         href="#"
         className={`button action-primary ${className}`}
-        onClick={onClick}
+        onClick={(e) => { e.preventDefault(); e.stopPropagation(); onClick(); }}
       >
         {label}
       </a>
@@ -39,18 +39,27 @@ export default function StudioUi({
   const [step, setStep] = React.useState(ConfigPage.Styling);
   const [styling, setStyling] = React.useState(initialStyling);
   const [panels, setPanels] = React.useState(initialPanels);
+
   const handleSave = () => {
     runtime.notify('save', { state: 'start' });
-    $.post(studioSaveUrl, JSON.stringify({ styling, panels }));
-    runtime.notify('save', { state: 'end' });
+    $.post(studioSaveUrl, JSON.stringify({ styling, panels }))
+      .done(() => {
+        runtime.notify('save', { state: 'end' });
+      })
+      .fail(() => {
+        runtime.notify('error', { title: 'Save Error', message: 'Failed to save accordion configuration' });
+      });
   };
+
   return (
     <div className="xblock-accordion xblock--accordion--editor editor-with-buttons">
       <div className="d-flex flex-column" style={{ height: '375px' }}>
-        <div className="d-flex flex-column overflow-auto m-2.5">
-          {step === ConfigPage.Styling && (<StylingPage styling={styling} setStyling={setStyling} />)}
-          {step === ConfigPage.Editing && (
-            <EditingPage panels={panels} setPanels={setPanels} />)}
+        <div className="d-flex flex-column overflow-auto m-2.5" style={{ minHeight: '300px', scrollBehavior: 'auto' }}>
+          <div style={{ minHeight: '300px' }}>
+            {step === ConfigPage.Styling && (<StylingPage styling={styling} setStyling={setStyling} />)}
+            {step === ConfigPage.Editing && (
+              <EditingPage panels={panels} setPanels={setPanels} />)}
+          </div>
         </div>
 
         <div className="xblock-actions">
@@ -79,7 +88,7 @@ export default function StudioUi({
               <a
                 href="#"
                 className="button cancel-button"
-                onClick={() => runtime.notify('cancel', {})}
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); runtime.notify('cancel', {}); }}
               >Cancel
               </a>
             </li>

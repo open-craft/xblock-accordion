@@ -7303,9 +7303,14 @@ function Uh({ panels: e, styling: t }) {
   ] });
 }
 const Ah = (e, { panels: t, styling: n }) => {
+  const r = e && "jquery" in e ? e[0] : e;
+  if (!r || !(r instanceof Element)) {
+    console.error("Invalid DOM element provided to renderBlock:", e);
+    return;
+  }
   ec.render(
     /* @__PURE__ */ le.jsx(M.StrictMode, { children: /* @__PURE__ */ le.jsx(Uh, { panels: t, styling: n }) }),
-    e
+    r
   );
 };
 export {
