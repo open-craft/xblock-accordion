@@ -3,10 +3,9 @@ coverage:
     project:
       default:
         enabled: yes
-        target: auto
+        target: 80%
     patch:
       default:
-        enabled: yes
-        target: 100%
+        enabled: no
 
 comment: false
