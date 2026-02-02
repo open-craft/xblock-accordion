@@ -11,8 +11,16 @@ try:
     import importlib_resources
 except ImportError:  # pragma: no cover
     from importlib import resources as importlib_resources
+try:
+    from xmodule.edxnotes_utils import edxnotes
+except ModuleNotFoundError:
+
+    def edxnotes(func):  # noqa: D103
+        return func
 
 
+@XBlock.needs("user")
+@edxnotes
 class AccordionXBlock(XBlock):
     """
     Accordion XBlock.
@@ -30,11 +38,21 @@ class AccordionXBlock(XBlock):
         data = importlib_resources.files("accordion").joinpath(path).read_text("utf8")
         return data
 
+    def get_html(self):
+        """
+        This method returns the HTML generated for the LMS.
+
+        This is specifically used to support edx-notes for Accordion XBlock,
+        this provides an achor to be added to the HTML where the edx-notes HTML can be injected.
+        """
+        html = self.resource_string("static/html/accordion_student.html")
+        return html
+
     def student_view(self, context=None):  # pylint: disable=unused-argument
         """
         Create primary view of the AccordionXBlock, shown to students when viewing courses.
         """
-        frag = Fragment()
+        frag = Fragment(self.get_html())
         frag.add_javascript(self.resource_string("static/student.js"))
         frag.add_css_url(self.runtime.local_resource_url(self, "public/student-ui.css"))
         frag.initialize_js(
