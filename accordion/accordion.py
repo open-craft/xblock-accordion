@@ -40,9 +40,9 @@ class AccordionXBlock(XBlock):
 
     def get_html(self):
         """
-        This method returns the HTML generated for the LMS.
+        Student notes helper that returns the HTML generated for the LMS.
 
-        This is specifically used to support edx-notes for Accordion XBlock,
+        It is specifically used to support edx-notes for Accordion XBlock,
         this provides an achor to be added to the HTML where the edx-notes HTML can be injected.
         """
         html = self.resource_string("static/html/accordion_student.html")
