@@ -2,6 +2,8 @@
 An XBlock for creating and accordion component with multiple panels with rich content.
 """
 
+import re
+
 from django.utils import translation
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
@@ -11,6 +13,11 @@ try:
     import importlib_resources
 except ImportError:  # pragma: no cover
     from importlib import resources as importlib_resources
+
+
+def _strip_html(text):
+    """Strip HTML tags from ``text``, replacing them with spaces."""
+    return re.sub(r"<[^>]+>", " ", text)
 
 
 class AccordionXBlock(XBlock):
@@ -77,6 +84,30 @@ class AccordionXBlock(XBlock):
             },
         )
         return frag
+
+    def index_dictionary(self):
+        """
+        Return dictionary prepared with block content and type for indexing.
+        """
+        xblock_body = super().index_dictionary()
+        parts = []
+        for panel in (self.panels or []):
+            if not isinstance(panel, dict):
+                continue
+            if panel.get("title"):
+                parts.append(str(panel["title"]))
+            if panel.get("contents"):
+                parts.append(_strip_html(str(panel["contents"])))
+        index_body = {
+            "display_name": self.display_name,
+            "accordion_content": " ".join(parts).strip(),
+        }
+        if "content" in xblock_body:
+            xblock_body["content"].update(index_body)
+        else:
+            xblock_body["content"] = index_body
+        xblock_body["content_type"] = "Accordion"
+        return xblock_body
 
     @staticmethod
     def workbench_scenarios():  # pragma: no cover
