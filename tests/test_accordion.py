@@ -29,3 +29,49 @@ def test_studio_view_json_data():
     assert "panels" in as_dict["json_init_args"]
     assert "styling" in as_dict["json_init_args"]
     assert "url" in as_dict["json_init_args"]
+
+
+def test_index_dictionary():
+    """Test the search index dictionary includes titles and stripped contents."""
+    scope_ids = ScopeIds("1", "2", "3", "4")
+    block = AccordionXBlock(ToyRuntime(), scope_ids=scope_ids)
+    block.display_name = "My Accordion"
+    block.panels = [
+        {
+            "title": "First panel",
+            "contents": "<p>Hello <strong>world</strong></p>",
+            "expanded": True,
+        },
+        {"title": None, "contents": "Plain text"},
+    ]
+    block.styling = {"color": "red"}
+    block.border_style = "solid"
+
+    result = block.index_dictionary()
+
+    assert result["content_type"] == "Accordion"
+    assert result["content"]["display_name"] == "My Accordion"
+    content = result["content"]["accordion_content"]
+    assert "First panel" in content
+    assert "Hello" in content
+    assert "world" in content
+    assert "Plain text" in content
+    # HTML tags are stripped.
+    assert "<p>" not in content
+    assert "<strong>" not in content
+    # Presentation-only data is excluded.
+    assert "expanded" not in content
+    assert "red" not in str(result["content"])
+    assert "solid" not in str(result["content"])
+
+
+def test_index_dictionary_empty_panels():
+    """Test index_dictionary with no panels and malformed panel entries."""
+    scope_ids = ScopeIds("1", "2", "3", "4")
+    block = AccordionXBlock(ToyRuntime(), scope_ids=scope_ids)
+    block.panels = ["not-a-dict", {}]
+
+    result = block.index_dictionary()
+
+    assert result["content_type"] == "Accordion"
+    assert result["content"]["accordion_content"] == ""
