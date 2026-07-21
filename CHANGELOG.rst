@@ -16,6 +16,19 @@ Unreleased
 
 *
 
+1.1.0 – 2026-07-21
+**********************************************
+
+Added
+=====
+
+* Content-search (Meilisearch) support: panel titles and contents are indexed via ``index_dictionary``.
+
+Fixed
+=====
+
+* Unstyled TinyMCE editor in Studio: skin/content CSS now resolves from the bundle (``skin_url: 'default'``).
+
 0.1.0 – 2024-06-25
 **********************************************
 
