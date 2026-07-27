@@ -72261,7 +72261,7 @@ const mTe = (o, r, {
     console.error("Invalid DOM element provided to renderEditor:", r);
     return;
   }
-  const y = o.handlerUrl(h, "studio_save");
+  const y = o.handlerUrl(r, "studio_save");
   Ure.render(
     /* @__PURE__ */ Qr.jsx(et.StrictMode, { children: /* @__PURE__ */ Qr.jsx(
       uTe,
