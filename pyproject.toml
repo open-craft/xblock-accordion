@@ -37,6 +37,7 @@ dependencies = [
     "XBlock",
     "xblock-utils",
     "pydantic < 3.0",
+    "nh3",
 ]
 
 [project.entry-points."xblock.v1"]
