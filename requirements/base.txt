@@ -52,6 +52,8 @@ markupsafe==2.1.5
     # via
     #   mako
     #   xblock
+nh3==0.2.18
+    # via -r requirements/base.in
 openedx-django-pyfs==3.6.0
     # via xblock
 path==16.16.0
@@ -102,4 +104,3 @@ zipp==3.19.2
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
-nh3

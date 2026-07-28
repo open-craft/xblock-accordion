@@ -154,6 +154,8 @@ mdurl==0.1.2
     # via
     #   -r requirements/test.txt
     #   markdown-it-py
+nh3==0.2.18
+    # via -r requirements/test.txt
 openedx-django-pyfs==3.6.0
     # via
     #   -r requirements/test.txt
@@ -328,3 +330,7 @@ zipp==3.19.2
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
+
+# edx-lint's pylint plugin imports pkg_resources, which setuptools>=81 removed,
+# and the version virtualenv seeds is no longer compatible.
+setuptools<81
