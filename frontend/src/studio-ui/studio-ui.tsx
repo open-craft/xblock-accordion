@@ -53,7 +53,7 @@ export default function StudioUi({
 
   return (
     <div className="xblock-accordion xblock--accordion--editor editor-with-buttons">
-      <div className="d-flex flex-column" style={{ height: '375px' }}>
+      <div className="d-flex flex-column editor-layout">
         <div className="d-flex flex-column overflow-auto m-2.5" style={{ minHeight: '300px', scrollBehavior: 'auto' }}>
           <div style={{ minHeight: '300px' }}>
             {step === ConfigPage.Styling && (<StylingPage styling={styling} setStyling={setStyling} />)}

@@ -72203,7 +72203,7 @@ function uTe({
       u.notify("error", { title: "Save Error", message: "Failed to save accordion configuration" });
     });
   };
-  return /* @__PURE__ */ Qr.jsx("div", { className: "xblock-accordion xblock--accordion--editor editor-with-buttons", children: /* @__PURE__ */ Qr.jsxs("div", { className: "d-flex flex-column", style: { height: "375px" }, children: [
+  return /* @__PURE__ */ Qr.jsx("div", { className: "xblock-accordion xblock--accordion--editor editor-with-buttons", children: /* @__PURE__ */ Qr.jsxs("div", { className: "d-flex flex-column editor-layout", children: [
     /* @__PURE__ */ Qr.jsx("div", { className: "d-flex flex-column overflow-auto m-2.5", style: { minHeight: "300px", scrollBehavior: "auto" }, children: /* @__PURE__ */ Qr.jsxs("div", { style: { minHeight: "300px" }, children: [
       h === 0 && /* @__PURE__ */ Qr.jsx(qEe, { styling: k, setStyling: E }),
       h === 1 && /* @__PURE__ */ Qr.jsx(cTe, { panels: D, setPanels: L })
