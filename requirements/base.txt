@@ -52,6 +52,8 @@ markupsafe==2.1.5
     # via
     #   mako
     #   xblock
+nh3==0.2.18
+    # via -r requirements/base.in
 openedx-django-pyfs==3.6.0
     # via xblock
 path==16.16.0

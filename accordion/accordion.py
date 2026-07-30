@@ -2,8 +2,9 @@
 An XBlock for creating and accordion component with multiple panels with rich content.
 """
 
-import re
+import html
 
+import nh3
 from django.utils import translation
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
@@ -16,8 +17,9 @@ except ImportError:  # pragma: no cover
 
 
 def _strip_html(text):
-    """Strip HTML tags from ``text``, replacing them with spaces."""
-    return re.sub(r"<[^>]+>", " ", text)
+    """Reduce HTML to searchable plain text; script/style contents are dropped."""
+    text = (text or "").replace("<", " <")
+    return " ".join(html.unescape(nh3.clean(text, tags=set())).split())
 
 
 class AccordionXBlock(XBlock):
@@ -71,8 +73,8 @@ class AccordionXBlock(XBlock):
         """
         Create primary view of the AccordionXBlock, shown to students when viewing courses.
         """
-        html = self.resource_string("static/html/accordion.html")
-        frag = Fragment(html)
+        editor_html = self.resource_string("static/html/accordion.html")
+        frag = Fragment(editor_html)
         frag.add_javascript(self.resource_string("static/studio.js"))
         frag.add_css_url(self.runtime.local_resource_url(self, "public/studio-ui.css"))
         frag.initialize_js(

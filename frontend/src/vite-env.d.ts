@@ -12,8 +12,10 @@ type PanelStyling = {
   borderColor?: string,
 };
 
+type XBlockElementLike = Element | { readonly 0: Element; readonly jquery: string };
+
 interface XBlockRuntime {
-  handlerUrl: (element: Element | null, action: string) => string
+  handlerUrl: (element: XBlockElementLike | null, action: string) => string
   notify: (action: string, data: object) => void
 }
 
