@@ -16,6 +16,19 @@ Unreleased
 
 *
 
+1.1.1 – 2026-07-31
+**********************************************
+
+Fixed
+=====
+
+* Studio editor not rendering in v2 content libraries (learning-core runtime ``handlerUrl`` compatibility).
+
+Changed
+=======
+
+* Search indexing now strips HTML with ``nh3``, dropping script/style contents and decoding entities.
+
 1.1.0 – 2026-07-21
 **********************************************
 
