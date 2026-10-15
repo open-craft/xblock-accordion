@@ -22,6 +22,27 @@ def _strip_html(text):
     return " ".join(html.unescape(nh3.clean(text, tags=set())).split())
 
 
+# The description is authored in TinyMCE and rendered into the student view, so it
+# is sanitised on the way out. The allowlist is deliberately narrow (an accordion
+# description is introductory copy) and is mirrored by the Studio editor, which
+# only offers these formats and no media/link/table controls.
+#
+# Note: the pinned nh3 (0.2.18) has no ``Cleaner``/``filter_style_properties``, so
+# no attributes are allowed at all - which is why inline ``style`` (and therefore
+# the colour picker) is not offered for the description.
+_DESCRIPTION_TAGS = {"p", "strong", "em", "h3", "h4", "br"}
+_DESCRIPTION_ATTRIBUTES = {}
+
+
+def _sanitize_description(text):
+    """Sanitize an author-provided description before rendering it to students."""
+    return nh3.clean(
+        text or "",
+        tags=_DESCRIPTION_TAGS,
+        attributes=_DESCRIPTION_ATTRIBUTES,
+    )
+
+
 class AccordionXBlock(XBlock):
     """
     Accordion XBlock.
@@ -32,6 +53,11 @@ class AccordionXBlock(XBlock):
     styling = Dict(help="Accordion styling", default={}, scope=Scope.content)
     border_style = String(
         help="Accordion border style", default="", scope=Scope.content
+    )
+    description = String(
+        help="Rich text description shown above the accordion entries",
+        default="",
+        scope=Scope.content,
     )
 
     def resource_string(self, path):
@@ -52,6 +78,7 @@ class AccordionXBlock(XBlock):
                 "url": self.runtime.local_resource_url(self, "public/student-ui.js"),
                 "panels": self.panels,
                 "styling": self.styling,
+                "description": _sanitize_description(self.description),
             },
         )
         return frag
@@ -63,10 +90,15 @@ class AccordionXBlock(XBlock):
         """Save config and data based on data received at this API endpoint."""
         panels = data.get("panels", None)
         styling = data.get("styling", None)
+        description = data.get("description", None)
         if panels:
             self.panels = panels
         if styling:
             self.styling = styling
+        # An absent key leaves the description untouched, while an empty string
+        # clears it - hence a None check rather than the truthiness checks above.
+        if description is not None:
+            self.description = description
         return {"result": "success"}
 
     def studio_view(self, context=None):  # pylint: disable=unused-argument
@@ -83,6 +115,7 @@ class AccordionXBlock(XBlock):
                 "url": self.runtime.local_resource_url(self, "public/studio-ui.js"),
                 "panels": self.panels,
                 "styling": self.styling,
+                "description": self.description,
             },
         )
         return frag

@@ -1,10 +1,24 @@
 import React from 'react';
 import {
-  beforeEach, describe, expect, it,
+  beforeEach, describe, expect, it, vi,
 } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import {
+  render, screen, waitFor, within,
+} from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import StudentUi from './student-ui';
+
+// The toggle icons are replaced with identifiable stand-ins so the tests can tell
+// the expand (plus) icon apart from the collapse (minus) one.
+vi.mock('@openedx/paragon/icons/es5/Add', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="plus-icon" />,
+}));
+
+vi.mock('@openedx/paragon/icons/es5/Remove', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="minus-icon" />,
+}));
 
 describe('StudentUi', () => {
   let props;
@@ -96,5 +110,56 @@ describe('StudentUi', () => {
     expect(trigger).toHaveStyle({ backgroundColor: props.styling.backgroundColor });
     expect(trigger).toHaveStyle({ color: props.styling.textColor });
     expect(trigger).toHaveStyle({ fontSize: props.styling.fontSize });
+  });
+
+  it('renders the description above the accordion', () => {
+    const { container } = render(
+      <StudentUi {...props} description="<p>An <strong>intro</strong></p>" />,
+    );
+
+    const description = container.querySelector('.accordion-description') as HTMLElement;
+    expect(description).toBeInTheDocument();
+    expect(description.innerHTML).toBe('<p>An <strong>intro</strong></p>');
+
+    const firstPanel = container.querySelector('.collapsible-card') as Node;
+    expect(description.compareDocumentPosition(firstPanel)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+
+  it('omits an empty description', () => {
+    const { container } = render(<StudentUi {...props} description="   " />);
+
+    expect(container.querySelector('.accordion-description')).not.toBeInTheDocument();
+  });
+
+  it('renders no description for blocks saved before the field existed', () => {
+    const { container } = render(<StudentUi {...props} />);
+
+    expect(container.querySelector('.accordion-description')).not.toBeInTheDocument();
+  });
+
+  it('shows the plus icon when collapsed and the minus icon when expanded', async () => {
+    render(<StudentUi {...props} />);
+    const trigger = screen.getByRole('button', { name: 'panel title 1' });
+
+    expect(within(trigger).getByTestId('plus-icon')).toBeInTheDocument();
+    expect(within(trigger).queryByTestId('minus-icon')).not.toBeInTheDocument();
+
+    await userEvent.click(trigger);
+
+    await waitFor(() => expect(within(trigger).getByTestId('minus-icon')).toBeInTheDocument());
+    expect(within(trigger).queryByTestId('plus-icon')).not.toBeInTheDocument();
+  });
+
+  it('keeps the toggle icon at the start of the trigger, before the title', () => {
+    render(<StudentUi {...props} />);
+    const trigger = screen.getByRole('button', { name: 'panel title 1' });
+
+    const title = within(trigger).getByText('panel title 1');
+    const icon = within(trigger).getByTestId('plus-icon');
+
+    // The icon comes first and the title grows to fill the row, which is what
+    // keeps the icon left-aligned with the title beside it.
+    expect(icon.compareDocumentPosition(title)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(trigger.firstElementChild as HTMLElement).toContainElement(icon);
   });
 });

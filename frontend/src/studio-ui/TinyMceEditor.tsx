@@ -45,32 +45,54 @@ import 'tinymce/plugins/visualchars';
 // importing plugin resources
 // import 'tinymce/plugins/emoticons/js/emojis';
 
+const DEFAULT_PLUGINS = [
+  'advlist', 'autolink', 'lists', 'link', 'image',
+  'searchreplace', 'visualblocks', 'code', 'fullscreen',
+  'media', 'table', 'code', 'help',
+];
+
+const DEFAULT_TOOLBAR = [
+  'undo redo | blocks | bold italic forecolor | alignleft aligncenter '
+            + 'alignright alignjustify | bullist numlist outdent indent | ',
+  'link unlink | image media | table | removeformat | code | fullscreen | help',
+];
+
 interface TinyMceEditorProps {
   value: string;
   onChange: (value: string) => void;
+  /** DOM id, so a label elsewhere on the page can be associated with the editor. */
+  id?: string;
+  /** Overrides the default plugin set, eg. for an editor with a restricted toolbar. */
+  plugins?: string[];
+  /** Overrides the default toolbar. */
+  toolbar?: string[];
+  /** Restricts the block format dropdown, eg. to the formats a sanitizer allows. */
+  blockFormats?: string;
 }
 
-function TinyMceEditor({ value, onChange }: TinyMceEditorProps) {
+function TinyMceEditor({
+  value,
+  onChange,
+  id = undefined,
+  plugins = DEFAULT_PLUGINS,
+  toolbar = DEFAULT_TOOLBAR,
+  blockFormats = undefined,
+}: TinyMceEditorProps) {
+  const init = {
+    promotion: false,
+    menubar: false,
+    skin_url: 'default',
+    plugins,
+    toolbar,
+    ...(blockFormats ? { block_formats: blockFormats } : {}),
+  };
   return (
     <Editor
       licenseKey="gpl"
+      id={id}
       value={value}
       onEditorChange={(newValue) => onChange(newValue)}
-      init={{
-        promotion: false,
-        menubar: false,
-        skin_url: 'default',
-        plugins: [
-          'advlist', 'autolink', 'lists', 'link', 'image',
-          'searchreplace', 'visualblocks', 'code', 'fullscreen',
-          'media', 'table', 'code', 'help',
-        ],
-        toolbar: [
-          'undo redo | blocks | bold italic forecolor | alignleft aligncenter '
-                    + 'alignright alignjustify | bullist numlist outdent indent | ',
-          'link unlink | image media | table | removeformat | code | fullscreen | help',
-        ],
-      }}
+      init={init}
     />
   );
 }

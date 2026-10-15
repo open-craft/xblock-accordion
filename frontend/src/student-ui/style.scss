@@ -29,4 +29,30 @@
     .rounded-0 {
         border-radius: 0;
     }
+
+    // Bootstrap utilities are not part of this bundle, so the few used by the
+    // markup are defined here. The title grows to fill the row, which is what
+    // keeps the expand/collapse icon on the left and the title beside it.
+    .flex-grow-1 {
+        flex-grow: 1;
+    }
+
+    .collapsible-trigger {
+        // The icon is the first item, so it sits on the left beside the title.
+        // Without a gap the title text butts straight up against it.
+        gap: 0.5rem;
+
+        // Keep the full 24px hit area when a long title wraps in a narrow column.
+        .pgn__icon {
+            flex-shrink: 0;
+        }
+    }
+
+    .accordion-description {
+        margin-bottom: 1rem;
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
 }

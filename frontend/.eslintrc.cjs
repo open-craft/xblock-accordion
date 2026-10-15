@@ -39,6 +39,9 @@ module.exports = {
             depth: 25,
         }],
         'react/jsx-props-no-spreading': 'off',
+        // Optional props are given defaults in the function signature, which is
+        // the TypeScript-friendly equivalent of defaultProps.
+        'react/require-default-props': ['error', { functions: 'defaultArguments' }],
         'react/react-in-jsx-scope': 'off',
         'react/jsx-one-expression-per-line': 'off',
         'react/destructuring-assignment': 'off',

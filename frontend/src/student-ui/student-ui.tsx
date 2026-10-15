@@ -6,15 +6,31 @@ import CollapsibleAdvanced from '@openedx/paragon/dist/Collapsible/CollapsibleAd
 import CollapsibleTrigger from '@openedx/paragon/dist/Collapsible/CollapsibleTrigger';
 import CollapsibleBody from '@openedx/paragon/dist/Collapsible/CollapsibleBody';
 import CollapsibleVisible from '@openedx/paragon/dist/Collapsible/CollapsibleVisible';
-import KeyboardArrowDown from '@openedx/paragon/icons/es5/KeyboardArrowDown';
-import KeyboardArrowUp from '@openedx/paragon/icons/es5/KeyboardArrowUp';
+import Add from '@openedx/paragon/icons/es5/Add';
+import Remove from '@openedx/paragon/icons/es5/Remove';
 
 interface StudentUiProps {
   panels: Panel[],
   styling: PanelStyling,
+  description?: string,
 }
 
-function StudentUi({ panels: rawPanels, styling }: StudentUiProps) {
+interface DescriptionProps {
+  html: string,
+}
+
+/**
+ * The description is authored as HTML in Studio and sanitised server-side in the
+ * XBlock's ``student_view`` before it is handed to the block.
+ */
+function Description({ html }: DescriptionProps) {
+  return (
+    // eslint-disable-next-line react/no-danger
+    <div className="accordion-description" dangerouslySetInnerHTML={{ __html: html }} />
+  );
+}
+
+function StudentUi({ panels: rawPanels, styling, description = '' }: StudentUiProps) {
   const [panels, setPanels] = useState(rawPanels);
   const togglePanel = (index: number) => {
     const newPanels = [...panels];
@@ -29,6 +45,7 @@ function StudentUi({ panels: rawPanels, styling }: StudentUiProps) {
 
   return (
     <div className="xblock-accordion">
+      {description.trim() !== '' && <Description html={description} />}
       <div className="d-flex justify-content-end mb-2">
         <Button variant="outline-primary" size="sm" onClick={() => toggleAll()}>
           {allExpanded
@@ -54,9 +71,9 @@ function StudentUi({ panels: rawPanels, styling }: StudentUiProps) {
               fontSize: styling?.fontSize,
             }}
           >
+            <CollapsibleVisible whenClosed><Icon src={Add} /></CollapsibleVisible>
+            <CollapsibleVisible whenOpen><Icon src={Remove} /></CollapsibleVisible>
             <span className="flex-grow-1 my-0">{panel.title}</span>
-            <CollapsibleVisible whenClosed><Icon src={KeyboardArrowDown} /></CollapsibleVisible>
-            <CollapsibleVisible whenOpen><Icon src={KeyboardArrowUp} /></CollapsibleVisible>
           </CollapsibleTrigger>
 
           <CollapsibleBody className="collapsible-body">

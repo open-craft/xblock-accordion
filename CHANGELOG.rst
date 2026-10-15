@@ -14,7 +14,18 @@ Change Log
 Unreleased
 **********
 
-*
+Added
+=====
+
+* A rich text description field, rendered above the accordion entries and edited
+  with TinyMCE in Studio. The description is sanitised to a narrow allowlist of
+  tags before it is shown to learners.
+
+Changed
+=======
+
+* Accordion entries now expand with a plus icon and collapse with a minus icon,
+  in place of the up/down arrows.
 
 1.1.1 – 2026-07-31
 **********************************************
