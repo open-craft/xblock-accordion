@@ -7,6 +7,7 @@ import './style.scss';
 export const renderEditor = (runtime: XBlockRuntime, element: XBlockElementLike | null, {
   panels,
   styling,
+  description = '',
 }: XBlockData) => {
   const container = element && 'jquery' in element ? element[0] : element;
 
@@ -23,6 +24,7 @@ export const renderEditor = (runtime: XBlockRuntime, element: XBlockElementLike 
         <StudioUi
           initialPanels={panels}
           initialStyling={styling}
+          initialDescription={description}
           studioSaveUrl={studioSaveUrl}
           runtime={runtime}
         />

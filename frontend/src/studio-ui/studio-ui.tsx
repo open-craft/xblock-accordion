@@ -9,6 +9,7 @@ enum ConfigPage {
 interface StudioUiProps {
   initialPanels: Panel[]
   initialStyling: PanelStyling
+  initialDescription?: string
   studioSaveUrl: string
   runtime: XBlockRuntime
 }
@@ -34,15 +35,16 @@ function ActionButtonLink({ className, onClick, label }: ActionButtonLinkProps) 
 }
 
 export default function StudioUi({
-  initialPanels, initialStyling, studioSaveUrl, runtime,
+  initialPanels, initialStyling, initialDescription = '', studioSaveUrl, runtime,
 }: StudioUiProps) {
   const [step, setStep] = React.useState(ConfigPage.Styling);
   const [styling, setStyling] = React.useState(initialStyling);
   const [panels, setPanels] = React.useState(initialPanels);
+  const [description, setDescription] = React.useState(initialDescription);
 
   const handleSave = () => {
     runtime.notify('save', { state: 'start' });
-    $.post(studioSaveUrl, JSON.stringify({ styling, panels }))
+    $.post(studioSaveUrl, JSON.stringify({ styling, panels, description }))
       .done(() => {
         runtime.notify('save', { state: 'end' });
       })
@@ -58,7 +60,13 @@ export default function StudioUi({
           <div style={{ minHeight: '300px' }}>
             {step === ConfigPage.Styling && (<StylingPage styling={styling} setStyling={setStyling} />)}
             {step === ConfigPage.Editing && (
-              <EditingPage panels={panels} setPanels={setPanels} />)}
+              <EditingPage
+                panels={panels}
+                setPanels={setPanels}
+                description={description}
+                setDescription={setDescription}
+              />
+            )}
           </div>
         </div>
 

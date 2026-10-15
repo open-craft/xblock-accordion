@@ -4,7 +4,11 @@ import StudentUi from './student-ui';
 import './style.scss';
 
 // eslint-disable-next-line import/prefer-default-export
-export const renderBlock = (element: Element | null, { panels, styling }: XBlockData) => {
+export const renderBlock = (element: Element | null, {
+  panels,
+  styling,
+  description = '',
+}: XBlockData) => {
   const container = element && 'jquery' in element ? element[0] : element;
 
   if (!container || !(container instanceof Element)) {
@@ -16,7 +20,7 @@ export const renderBlock = (element: Element | null, { panels, styling }: XBlock
   ReactDOM.render(
     (
       <React.StrictMode>
-        <StudentUi panels={panels} styling={styling} />
+        <StudentUi panels={panels} styling={styling} description={description} />
       </React.StrictMode>
     ),
     container,

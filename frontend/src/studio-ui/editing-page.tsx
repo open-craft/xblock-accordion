@@ -6,9 +6,20 @@ import TinyMceEditor from './TinyMceEditor';
 interface EditingPageProps {
   panels: Panel[]
   setPanels: (val: Panel[]) => void
+  description: string
+  setDescription: (val: string) => void
 }
 
-function EditingPage({ panels, setPanels }: EditingPageProps) {
+// The description is sanitised server-side down to exactly these tags, so the
+// editor offers only these formats and none of the media/link/table controls.
+const DESCRIPTION_ID = 'accordion-description';
+const DESCRIPTION_PLUGINS = ['autolink'];
+const DESCRIPTION_TOOLBAR = ['undo redo | bold italic | blocks | removeformat'];
+const DESCRIPTION_BLOCK_FORMATS = 'Paragraph=p; Heading 3=h3; Heading 4=h4';
+
+function EditingPage({
+  panels, setPanels, description, setDescription,
+}: EditingPageProps) {
   const [selectedPanel, setSelectedPanel] = React.useState<number | null>(0);
   const addNewPanel = () => {
     setPanels([...panels, { title: null, contents: '' }]);
@@ -42,6 +53,17 @@ function EditingPage({ panels, setPanels }: EditingPageProps) {
   };
   return (
     <>
+      <div className="d-flex flex-column mb-2">
+        <label className="mb-2" htmlFor={DESCRIPTION_ID}>Description</label>
+        <TinyMceEditor
+          id={DESCRIPTION_ID}
+          value={description}
+          onChange={setDescription}
+          plugins={DESCRIPTION_PLUGINS}
+          toolbar={DESCRIPTION_TOOLBAR}
+          blockFormats={DESCRIPTION_BLOCK_FORMATS}
+        />
+      </div>
       <div className="d-flex justify-content-end">
         <Button iconBefore={Plus} onClick={addNewPanel}>Add Accordion</Button>
       </div>

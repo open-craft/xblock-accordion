@@ -50,6 +50,7 @@ describe('StudioUi component test', () => {
     expect(jqueryMock.post).toHaveBeenCalledWith(studioSaveUrl, JSON.stringify({
       styling: {},
       panels: [],
+      description: '',
     }));
   });
 
@@ -58,5 +59,15 @@ describe('StudioUi component test', () => {
     await userEvent.click(screen.getByRole('link', { name: /Cancel/i }));
     expect(mockNotify)
       .toHaveBeenCalledWith('cancel', {});
+  });
+
+  it('saves the description', async () => {
+    render(<StudioUi {...studioUiProps} initialDescription="<p>Intro</p>" />);
+    await userEvent.click(screen.getByRole('link', { name: /Save/i }));
+    expect(jqueryMock.post).toHaveBeenCalledWith(studioSaveUrl, JSON.stringify({
+      styling: {},
+      panels: [],
+      description: '<p>Intro</p>',
+    }));
   });
 });

@@ -7,6 +7,7 @@ const mockRuntime: XBlockRuntime = {
 };
 
 renderEditor(mockRuntime, document.querySelector('#root'), {
+  description: '<p>An <strong>intro</strong> description.</p>',
   panels: [
     {
       title: 'test',
