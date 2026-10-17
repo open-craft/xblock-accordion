@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @import "../index";
 // Needed for collapse animations
 @import "~bootstrap/scss/transitions";
@@ -5,46 +7,116 @@
 @import "~@openedx/paragon/src/Collapsible/index.scss";
 
 .xblock-accordion {
-    .d-flex {
+    // Body copy aligns under the title column, offset by 16px. Every term is a
+    // Paragon spacing token or the fixed 24px icon box, so the indent tracks the
+    // design system without introducing padding variables of its own. The icon is
+    // deliberately 24px rather than 1.5rem: Paragon icons are fixed-size SVGs, so
+    // the alignment must not scale with the root font size.
+    --accordion-body-indent: calc(
+        var(--pgn-spacing-spacer-4-5, 32px) + 24px
+            + var(--pgn-spacing-spacer-4-5, 32px) + var(--pgn-spacing-spacer-3, 16px)
+    );
+
+    // Semantic colour aliases. Each prefers the design-system token and falls back
+    // to the WGU design value, so a host theme that defines the token wins and the
+    // design is preserved where it does not.
+    --accordion-color-title: var(--pgn-color-primary-base, #2a578d);
+    --accordion-color-action: var(--pgn-color-info-base, #3874bc);
+    --accordion-color-border: var(--pgn-color-gray-200, #d3d8df);
+    --accordion-color-surface-open: var(--pgn-color-primary-100, #ecf5f7);
+    --accordion-color-surface-hover: var(--pgn-color-gray-100, #f4f5f7);
+    --accordion-color-focus: var(--pgn-color-primary-base, #0a3055);
+
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+
+    .accordion-toolbar {
         display: flex;
-    }
-
-    .justify-content-end {
         justify-content: flex-end;
+        margin-bottom: var(--pgn-spacing-spacer-3, 16px);
     }
 
-    .mb-2 {
-        margin-bottom: 0.5rem;
+    .accordion-panels {
+        border: $border-width solid var(--accordion-color-border);
+        border-radius: var(--pgn-wgu-size-border-radius-base, 16px);
+        // Clips the row backgrounds and dividers to the rounded corners.
+        overflow: hidden;
     }
 
-    .px-3 {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-    }
-    .py-2 {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-    }
-
-    .rounded-0 {
+    // Paragon's card brings its own 1px border and radius; the container owns
+    // both now, so only the divider between closed rows remains.
+    .collapsible-card {
+        border: 0;
         border-radius: 0;
+
+        &:not(.is-open):not(:last-child) {
+            border-bottom: ($border-width * 2) solid var(--accordion-color-border);
+        }
+
+        // Nested so the selector is three classes: Paragon ships
+        // `.collapsible-card .collapsible-trigger` (two classes), and a host page
+        // that loads its stylesheet after ours would otherwise win on order.
+        .collapsible-trigger {
+            border: 0;
+            border-radius: 0;
+            padding: var(--pgn-spacing-spacer-4, 24px) var(--pgn-spacing-spacer-4-5, 32px);
+            gap: var(--pgn-spacing-spacer-4-5, 32px);
+            justify-content: flex-start;
+            font-size: 20px;
+            // 1.6 matches the design's 32px line box for the 20px title.
+            line-height: 1.6;
+            color: var(--accordion-color-title);
+            background-color: transparent;
+
+            &[aria-expanded='true'] {
+                background-color: var(--accordion-color-surface-open);
+            }
+
+            // Paragon gives this role="button" element no focus indicator, and
+            // the container clips anything drawn outside it, so inset the ring.
+            &:focus-visible {
+                outline: 2px solid var(--accordion-color-focus);
+                outline-offset: -2px;
+            }
+
+            // The title fills the row. This is what keeps the icon on the left
+            // even if a host stylesheet reapplies `justify-content: space-between`.
+            .accordion-title {
+                flex-grow: 1;
+            }
+
+            // Keep the full 24px hit area when a long title wraps in a narrow column.
+            .pgn__icon {
+                flex-shrink: 0;
+            }
+        }
+
+        .collapsible-body {
+            padding: var(--pgn-spacing-spacer-4, 24px) var(--pgn-spacing-spacer-4-5, 32px)
+                var(--pgn-spacing-spacer-4, 24px) var(--accordion-body-indent);
+        }
     }
 
-    // Bootstrap utilities are not part of this bundle, so the few used by the
-    // markup are defined here. The title grows to fill the row, which is what
-    // keeps the expand/collapse icon on the left and the title beside it.
-    .flex-grow-1 {
-        flex-grow: 1;
+    .collapsible-card:not(.is-open) .collapsible-trigger:hover {
+        background-color: var(--accordion-color-surface-hover);
     }
 
-    .collapsible-trigger {
-        // The icon is the first item, so it sits on the left beside the title.
-        // Without a gap the title text butts straight up against it.
-        gap: 0.5rem;
+    .accordion-toggle {
+        // Design: 16px link-blue text with the unfold icon, no button chrome.
+        color: var(--accordion-color-action);
+        font-size: 1rem;
+        border: 0;
+        text-decoration: none;
+        // No side padding, so the unfold icon sits flush with the panel container.
+        padding-inline: 0;
 
-        // Keep the full 24px hit area when a long title wraps in a narrow column.
-        .pgn__icon {
-            flex-shrink: 0;
+        // Paragon's link variant has no focus ring of its own (only an underline),
+        // so give keyboard users an explicit, visible indicator.
+        &:focus-visible {
+            outline: 2px solid var(--accordion-color-focus);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
     }
 
@@ -55,4 +127,23 @@
             margin-bottom: 0;
         }
     }
+
+    // Below Paragon's sm breakpoint the title inset is too heavy, so halve the
+    // horizontal padding and pull the body indent in to match.
+    @media (max-width: (map.get($grid-breakpoints, sm) - .02px)) {
+        --accordion-body-indent: calc(
+            var(--pgn-spacing-spacer-3, 16px) + 24px
+                + var(--pgn-spacing-spacer-4-5, 32px) + var(--pgn-spacing-spacer-3, 16px)
+        );
+
+        .collapsible-card {
+            .collapsible-trigger {
+                padding: var(--pgn-spacing-spacer-4, 24px) var(--pgn-spacing-spacer-3, 16px);
+            }
+
+            .collapsible-body {
+                padding: var(--pgn-spacing-spacer-4, 24px) var(--pgn-spacing-spacer-3, 16px)
+                    var(--pgn-spacing-spacer-4, 24px) var(--accordion-body-indent);
+            }
+        }    }
 }

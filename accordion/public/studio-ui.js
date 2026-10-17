@@ -19027,7 +19027,7 @@ function YEe({
       Xte,
       {
         label: "Border color",
-        help: "Border color of accordion titles",
+        help: "Border color of the accordion panels",
         color: o.borderColor,
         setColor: (u) => i({ borderColor: u })
       }
@@ -72090,14 +72090,16 @@ function ide({
   id: i = void 0,
   plugins: u = uTe,
   toolbar: h = dTe,
-  blockFormats: y = void 0
+  blockFormats: y = void 0,
+  height: k = "400px"
 }) {
-  const k = {
+  const _ = {
     promotion: !1,
     menubar: !1,
     skin_url: "default",
     plugins: u,
     toolbar: h,
+    height: k,
     ...y ? { block_formats: y } : {}
   };
   return /* @__PURE__ */ Wr.jsx(
@@ -72106,8 +72108,8 @@ function ide({
       licenseKey: "gpl",
       id: i,
       value: o,
-      onEditorChange: (_) => r(_),
-      init: k
+      onEditorChange: (D) => r(D),
+      init: _
     }
   );
 }
@@ -72141,7 +72143,8 @@ function hTe({
           onChange: u,
           plugins: fTe,
           toolbar: mTe,
-          blockFormats: pTe
+          blockFormats: pTe,
+          height: "200px"
         }
       )
     ] }),
@@ -72221,7 +72224,7 @@ function ene({ className: o, onClick: r, label: i }) {
 function gTe({
   initialPanels: o,
   initialStyling: r,
-  initialDescription: i = "",
+  initialDescription: i,
   studioSaveUrl: u,
   runtime: h
 }) {
@@ -72295,7 +72298,7 @@ function gTe({
 const yTe = (o, r, {
   panels: i,
   styling: u,
-  description: h = ""
+  description: h
 }) => {
   const y = r && "jquery" in r ? r[0] : r;
   if (!y || !(y instanceof Element)) {

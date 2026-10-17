@@ -8,29 +8,16 @@ import CollapsibleBody from '@openedx/paragon/dist/Collapsible/CollapsibleBody';
 import CollapsibleVisible from '@openedx/paragon/dist/Collapsible/CollapsibleVisible';
 import Add from '@openedx/paragon/icons/es5/Add';
 import Remove from '@openedx/paragon/icons/es5/Remove';
+import UnfoldLess from '@openedx/paragon/icons/es5/UnfoldLess';
+import UnfoldMore from '@openedx/paragon/icons/es5/UnfoldMore';
 
 interface StudentUiProps {
   panels: Panel[],
   styling: PanelStyling,
-  description?: string,
+  description: string,
 }
 
-interface DescriptionProps {
-  html: string,
-}
-
-/**
- * The description is authored as HTML in Studio and sanitised server-side in the
- * XBlock's ``student_view`` before it is handed to the block.
- */
-function Description({ html }: DescriptionProps) {
-  return (
-    // eslint-disable-next-line react/no-danger
-    <div className="accordion-description" dangerouslySetInnerHTML={{ __html: html }} />
-  );
-}
-
-function StudentUi({ panels: rawPanels, styling, description = '' }: StudentUiProps) {
+function StudentUi({ panels: rawPanels, styling, description }: StudentUiProps) {
   const [panels, setPanels] = useState(rawPanels);
   const togglePanel = (index: number) => {
     const newPanels = [...panels];
@@ -45,43 +32,53 @@ function StudentUi({ panels: rawPanels, styling, description = '' }: StudentUiPr
 
   return (
     <div className="xblock-accordion">
-      {description.trim() !== '' && <Description html={description} />}
-      <div className="d-flex justify-content-end mb-2">
-        <Button variant="outline-primary" size="sm" onClick={() => toggleAll()}>
+      {/* eslint-disable-next-line react/no-danger */}
+      {description.trim() !== '' && <div className="accordion-description" dangerouslySetInnerHTML={{ __html: description }} />}
+      <div className="accordion-toolbar">
+        <Button
+          variant="link"
+          className="accordion-toggle"
+          iconAfter={allExpanded ? UnfoldLess : UnfoldMore}
+          onClick={() => toggleAll()}
+        >
           {allExpanded
             ? 'Collapse all'
             : 'Expand all'}
         </Button>
       </div>
-      {panels.map((panel, idx) => (
-        <CollapsibleAdvanced
-          className="collapsible-card rounded-0 mb-2"
-          open={panel?.expanded}
-          onToggle={() => togglePanel(idx)}
-          style={{
-            borderColor: styling?.borderColor,
-          }}
-          key={`${panel.title}-${idx}`} // eslint-disable-line react/no-array-index-key
-        >
-          <CollapsibleTrigger
-            className="collapsible-trigger rounded-0 px-3 py-2"
-            style={{
-              backgroundColor: styling?.backgroundColor,
-              color: styling?.textColor,
-              fontSize: styling?.fontSize,
-            }}
+      <div
+        className="accordion-panels"
+        // Author styling is applied inline, so the design tokens in style.scss
+        // remain the defaults whenever the author has not set a value.
+        style={{ borderColor: styling?.borderColor }}
+      >
+        {panels.map((panel, idx) => (
+          <CollapsibleAdvanced
+            className={`collapsible-card${panel?.expanded ? ' is-open' : ''}`}
+            open={panel?.expanded}
+            onToggle={() => togglePanel(idx)}
+            key={`${panel.title}-${idx}`} // eslint-disable-line react/no-array-index-key
           >
-            <CollapsibleVisible whenClosed><Icon src={Add} /></CollapsibleVisible>
-            <CollapsibleVisible whenOpen><Icon src={Remove} /></CollapsibleVisible>
-            <span className="flex-grow-1 my-0">{panel.title}</span>
-          </CollapsibleTrigger>
+            <CollapsibleTrigger
+              className="collapsible-trigger"
+              style={{
+                backgroundColor: styling?.backgroundColor,
+                color: styling?.textColor,
+                fontSize: styling?.fontSize,
+              }}
+            >
+              <CollapsibleVisible whenClosed><Icon src={Add} /></CollapsibleVisible>
+              <CollapsibleVisible whenOpen><Icon src={Remove} /></CollapsibleVisible>
+              <span className="accordion-title">{panel.title}</span>
+            </CollapsibleTrigger>
 
-          <CollapsibleBody className="collapsible-body">
-            {/* eslint-disable-next-line react/no-danger */}
-            <div dangerouslySetInnerHTML={{ __html: panel.contents }} />
-          </CollapsibleBody>
-        </CollapsibleAdvanced>
-      ))}
+            <CollapsibleBody className="collapsible-body">
+              {/* eslint-disable-next-line react/no-danger */}
+              <div dangerouslySetInnerHTML={{ __html: panel.contents }} />
+            </CollapsibleBody>
+          </CollapsibleAdvanced>
+        ))}
+      </div>
     </div>
   );
 }

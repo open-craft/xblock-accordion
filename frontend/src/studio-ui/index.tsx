@@ -7,7 +7,7 @@ import './style.scss';
 export const renderEditor = (runtime: XBlockRuntime, element: XBlockElementLike | null, {
   panels,
   styling,
-  description = '',
+  description,
 }: XBlockData) => {
   const container = element && 'jquery' in element ? element[0] : element;
 

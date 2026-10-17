@@ -25,7 +25,7 @@ def _post_request(payload):
 
 def _studio_save(block, payload):
     """Call studio_save through its json_handler wrapper and return the response body."""
-    return json.loads(block.studio_save(_post_request(payload)).text)
+    return block.studio_save(_post_request(payload)).json
 
 
 def test_student_view_json_data():
@@ -104,7 +104,10 @@ def test_strip_html_hardening():
     assert _strip_html("<style>.a{color:red}</style>styled") == "styled"
     assert _strip_html('<img alt="a > b">text') == "text"
     assert _strip_html("<p>foo</p><p>bar</p>") == "foo bar"
-    assert _strip_html("see https://example.com <!-- hidden -->") == "see https://example.com"
+    assert (
+        _strip_html("see https://example.com <!-- hidden -->")
+        == "see https://example.com"
+    )
     assert _strip_html(None) == ""
 
 
@@ -116,31 +119,8 @@ def test_description_defaults_to_empty():
     assert block.student_view().to_dict()["json_init_args"]["description"] == ""
 
 
-def test_student_view_sanitizes_description():
-    """Only allowlisted markup in the description reaches the student view."""
-    block = _new_block()
-    block.description = (
-        "<h3>Intro</h3>"
-        "<p>Some <strong>bold</strong> and <em>italic</em> text.</p>"
-        "<script>alert(1)</script>"
-        '<img src="x" onerror="alert(1)">'
-        '<span style="color: #ff0000">red</span>'
-    )
-
-    description = block.student_view().to_dict()["json_init_args"]["description"]
-
-    assert "<h3>Intro</h3>" in description
-    assert "<strong>bold</strong>" in description
-    assert "<em>italic</em>" in description
-    assert "<script" not in description
-    assert "alert(1)" not in description
-    assert "<img" not in description
-    assert "onerror" not in description
-    assert "style" not in description
-
-
-def test_studio_view_keeps_the_raw_description():
-    """The editor gets the authored markup back so that it round-trips unchanged."""
+def test_studio_view_passes_the_stored_description_through():
+    """studio_view does not reprocess the value; studio_save already sanitised it."""
     block = _new_block()
     raw = '<p>Keep <span style="color: #ff0000">this</span></p>'
     block.description = raw
@@ -166,26 +146,40 @@ def test_studio_save_clears_the_description():
     assert block.description == ""
 
 
-def test_studio_save_without_a_description_leaves_it_alone():
-    """A payload without the key (eg. an older editor) must not wipe the description."""
+def test_studio_save_treats_an_explicit_null_as_clearing():
+    """A null description clears the field, so None is never stored."""
     block = _new_block()
-    block.description = "<p>Keep me</p>"
+    block.description = "<p>Old</p>"
 
-    _studio_save(block, {"panels": []})
+    _studio_save(block, {"description": None})
 
-    assert block.description == "<p>Keep me</p>"
+    assert block.description == ""
+
+
+def test_studio_save_sanitises_the_description_at_rest():
+    """Hostile markup never reaches storage; only the allowlisted subset is kept."""
+    block = _new_block()
+
+    _studio_save(
+        block,
+        {
+            "description": '<p>ok</p><script>alert(1)</script><img src=x onerror="alert(1)">'
+        },
+    )
+
+    assert block.description == "<p>ok</p>"
 
 
 def test_saved_description_round_trips():
-    """A saved description comes back unmodified in Studio and sanitised for learners."""
+    """A saved description is sanitised at rest, then rendered unchanged."""
     block = _new_block()
-    authored = '<h3>Intro</h3><p>Some <em>text</em></p><script>alert(1)</script>'
+    authored = "<h3>Intro</h3><p>Some <em>text</em></p><script>alert(1)</script>"
+    expected = "<h3>Intro</h3><p>Some <em>text</em></p>"
 
     _studio_save(block, {"description": authored})
 
-    # Studio gets the authored markup back, so the editor does not mangle it.
-    assert block.studio_view().to_dict()["json_init_args"]["description"] == authored
-    # Students only get the sanitised subset of it.
-    assert block.student_view().to_dict()["json_init_args"]["description"] == (
-        "<h3>Intro</h3><p>Some <em>text</em></p>"
-    )
+    # Storage only ever holds allowlisted markup.
+    assert block.description == expected
+    # Studio and the student view both get that same markup back.
+    assert block.studio_view().to_dict()["json_init_args"]["description"] == expected
+    assert block.student_view().to_dict()["json_init_args"]["description"] == expected

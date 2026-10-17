@@ -26,6 +26,7 @@ describe('StudioUi component test', () => {
   const studioUiProps = {
     initialPanels: [],
     initialStyling: {},
+    initialDescription: '',
     studioSaveUrl,
     runtime: { notify: mockNotify, handlerUrl: vi.fn() },
   };

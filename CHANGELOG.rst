@@ -14,18 +14,29 @@ Change Log
 Unreleased
 **********
 
+*
+
+1.2.0 – 2026-10-19
+**********************************************
+
 Added
 =====
 
 * A rich text description field, rendered above the accordion entries and edited
   with TinyMCE in Studio. The description is sanitised to a narrow allowlist of
-  tags before it is shown to learners.
+  tags when it is saved.
 
 Changed
 =======
 
 * Accordion entries now expand with a plus icon and collapse with a minus icon,
   in place of the up/down arrows.
+* Accordion panels are restyled to the refreshed design: a single centered
+  1280px container with a 16px radius, 2px dividers between collapsed rows,
+  tinted open rows, 20px titles and updated row spacing. Studio styling is
+  applied inline, so the design tokens remain the defaults.
+* The "Expand all" / "Collapse all" control is now a text button in the design's
+  link blue with an unfold icon, replacing the bordered outline button.
 
 1.1.1 – 2026-07-31
 **********************************************
