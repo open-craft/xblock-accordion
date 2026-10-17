@@ -68,6 +68,8 @@ interface TinyMceEditorProps {
   toolbar?: string[];
   /** Restricts the block format dropdown, eg. to the formats a sanitizer allows. */
   blockFormats?: string;
+  /** Set the height of the editor. Supports px, pt and em. Defaults to 400px. */
+  height?: string;
 }
 
 function TinyMceEditor({
@@ -77,6 +79,7 @@ function TinyMceEditor({
   plugins = DEFAULT_PLUGINS,
   toolbar = DEFAULT_TOOLBAR,
   blockFormats = undefined,
+  height = '400px',
 }: TinyMceEditorProps) {
   const init = {
     promotion: false,
@@ -84,6 +87,7 @@ function TinyMceEditor({
     skin_url: 'default',
     plugins,
     toolbar,
+    height,
     ...(blockFormats ? { block_formats: blockFormats } : {}),
   };
   return (

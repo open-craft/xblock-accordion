@@ -22,7 +22,6 @@ interface XBlockRuntime {
 interface XBlockData {
   panels: Panel[],
   styling: PanelStyling,
-  // Optional so blocks saved before this field existed, and the dev previews,
-  // keep working.
-  description?: string,
+  // The XBlock always sends a description, using "" when the block has none.
+  description: string,
 }

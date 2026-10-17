@@ -56,7 +56,7 @@ export default function StylingPage({
       />
       <ColorSelector
         label="Border color"
-        help="Border color of accordion titles"
+        help="Border color of the accordion panels"
         color={styling.borderColor}
         setColor={(value) => updateStyling({ borderColor: value })}
       />

@@ -62,6 +62,7 @@ function EditingPage({
           plugins={DESCRIPTION_PLUGINS}
           toolbar={DESCRIPTION_TOOLBAR}
           blockFormats={DESCRIPTION_BLOCK_FORMATS}
+          height="200px"
         />
       </div>
       <div className="d-flex justify-content-end">

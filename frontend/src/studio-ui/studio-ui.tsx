@@ -9,7 +9,7 @@ enum ConfigPage {
 interface StudioUiProps {
   initialPanels: Panel[]
   initialStyling: PanelStyling
-  initialDescription?: string
+  initialDescription: string
   studioSaveUrl: string
   runtime: XBlockRuntime
 }
@@ -35,7 +35,7 @@ function ActionButtonLink({ className, onClick, label }: ActionButtonLinkProps) 
 }
 
 export default function StudioUi({
-  initialPanels, initialStyling, initialDescription = '', studioSaveUrl, runtime,
+  initialPanels, initialStyling, initialDescription, studioSaveUrl, runtime,
 }: StudioUiProps) {
   const [step, setStep] = React.useState(ConfigPage.Styling);
   const [styling, setStyling] = React.useState(initialStyling);

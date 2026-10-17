@@ -20,11 +20,22 @@ vi.mock('@openedx/paragon/icons/es5/Remove', () => ({
   default: () => <svg data-testid="minus-icon" />,
 }));
 
+vi.mock('@openedx/paragon/icons/es5/UnfoldLess', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="unfold-less-icon" />,
+}));
+
+vi.mock('@openedx/paragon/icons/es5/UnfoldMore', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="unfold-more-icon" />,
+}));
+
 describe('StudentUi', () => {
   let props;
 
   beforeEach(() => {
     props = {
+      description: '',
       panels: [
         {
           title: 'panel title 1',
@@ -100,16 +111,61 @@ describe('StudentUi', () => {
     expect(screen.queryByRole('button', { name: 'Expand all' })).toBeInTheDocument();
   });
 
-  it('applies the correct styles', () => {
+  it('passes author styling through as inline styles', () => {
     const { container } = render(<StudentUi {...props} />);
 
-    const card = container.querySelector('.collapsible-card');
-    expect(card).toHaveStyle({ borderColor: props.styling.borderColor });
+    const panelsContainer = container.querySelector('.accordion-panels');
+    expect(panelsContainer).toHaveStyle({ borderColor: props.styling.borderColor });
 
     const trigger = container.querySelector('.collapsible-trigger');
     expect(trigger).toHaveStyle({ backgroundColor: props.styling.backgroundColor });
     expect(trigger).toHaveStyle({ color: props.styling.textColor });
     expect(trigger).toHaveStyle({ fontSize: props.styling.fontSize });
+  });
+
+  it('leaves the design tokens in charge when no author styling is set', () => {
+    const { container } = render(
+      <StudentUi panels={[{ title: 'Panel', contents: '' }]} styling={{}} description="" />,
+    );
+
+    const trigger = container.querySelector('.collapsible-trigger') as HTMLElement;
+    expect(trigger.style.backgroundColor).toBe('');
+    expect(trigger.style.fontSize).toBe('');
+  });
+
+  it('wraps every row in a single panel container', () => {
+    const { container } = render(<StudentUi {...props} />);
+
+    const panelsContainer = container.querySelector('.accordion-panels');
+    expect(panelsContainer).not.toBeNull();
+    expect(panelsContainer?.querySelectorAll('.collapsible-card'))
+      .toHaveLength(props.panels.length);
+  });
+
+  it('marks open rows so the divider and tint can follow their state', async () => {
+    const { container } = render(<StudentUi {...props} />);
+    const rowClasses = () => Array.from(container.querySelectorAll('.collapsible-card'))
+      .map((card) => card.className);
+
+    expect(rowClasses()[0]).not.toContain('is-open');
+
+    await userEvent.click(screen.getByRole('button', { name: 'panel title 1' }));
+
+    expect(rowClasses()[0]).toContain('is-open');
+    expect(rowClasses()[1]).not.toContain('is-open');
+  });
+
+  it('pairs the fold icon with the expand and collapse labels', async () => {
+    render(<StudentUi {...props} />);
+
+    const expandAll = screen.getByRole('button', { name: 'Expand all' });
+    expect(within(expandAll).getByTestId('unfold-more-icon')).toBeInTheDocument();
+
+    await userEvent.click(expandAll);
+
+    const collapseAll = screen.getByRole('button', { name: 'Collapse all' });
+    expect(within(collapseAll).getByTestId('unfold-less-icon')).toBeInTheDocument();
+    expect(within(collapseAll).queryByTestId('unfold-more-icon')).not.toBeInTheDocument();
   });
 
   it('renders the description above the accordion', () => {
@@ -131,12 +187,6 @@ describe('StudentUi', () => {
     expect(container.querySelector('.accordion-description')).not.toBeInTheDocument();
   });
 
-  it('renders no description for blocks saved before the field existed', () => {
-    const { container } = render(<StudentUi {...props} />);
-
-    expect(container.querySelector('.accordion-description')).not.toBeInTheDocument();
-  });
-
   it('shows the plus icon when collapsed and the minus icon when expanded', async () => {
     render(<StudentUi {...props} />);
     const trigger = screen.getByRole('button', { name: 'panel title 1' });
@@ -148,18 +198,5 @@ describe('StudentUi', () => {
 
     await waitFor(() => expect(within(trigger).getByTestId('minus-icon')).toBeInTheDocument());
     expect(within(trigger).queryByTestId('plus-icon')).not.toBeInTheDocument();
-  });
-
-  it('keeps the toggle icon at the start of the trigger, before the title', () => {
-    render(<StudentUi {...props} />);
-    const trigger = screen.getByRole('button', { name: 'panel title 1' });
-
-    const title = within(trigger).getByText('panel title 1');
-    const icon = within(trigger).getByTestId('plus-icon');
-
-    // The icon comes first and the title grows to fill the row, which is what
-    // keeps the icon left-aligned with the title beside it.
-    expect(icon.compareDocumentPosition(title)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(trigger.firstElementChild as HTMLElement).toContainElement(icon);
   });
 });

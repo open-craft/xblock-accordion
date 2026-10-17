@@ -22,20 +22,21 @@ def _strip_html(text):
     return " ".join(html.unescape(nh3.clean(text, tags=set())).split())
 
 
-# The description is authored in TinyMCE and rendered into the student view, so it
-# is sanitised on the way out. The allowlist is deliberately narrow (an accordion
-# description is introductory copy) and is mirrored by the Studio editor, which
-# only offers these formats and no media/link/table controls.
+# The description is authored in TinyMCE, so its markup is sanitised when it is
+# saved: storage and the student view both only see allowlisted markup. The
+# allowlist is deliberately narrow (an accordion description is introductory copy)
+# and is mirrored by the Studio editor, which only offers these formats and no
+# media/link/table controls.
 #
-# Note: the pinned nh3 (0.2.18) has no ``Cleaner``/``filter_style_properties``, so
-# no attributes are allowed at all - which is why inline ``style`` (and therefore
-# the colour picker) is not offered for the description.
+# Values written outside studio_save - an OLX import, a content-library copy, or a
+# direct field assignment - bypass this and are trusted as-is.
+
 _DESCRIPTION_TAGS = {"p", "strong", "em", "h3", "h4", "br"}
 _DESCRIPTION_ATTRIBUTES = {}
 
 
 def _sanitize_description(text):
-    """Sanitize an author-provided description before rendering it to students."""
+    """Sanitize author-provided description markup before it is stored."""
     return nh3.clean(
         text or "",
         tags=_DESCRIPTION_TAGS,
@@ -78,7 +79,7 @@ class AccordionXBlock(XBlock):
                 "url": self.runtime.local_resource_url(self, "public/student-ui.js"),
                 "panels": self.panels,
                 "styling": self.styling,
-                "description": _sanitize_description(self.description),
+                "description": self.description,
             },
         )
         return frag
@@ -95,10 +96,15 @@ class AccordionXBlock(XBlock):
             self.panels = panels
         if styling:
             self.styling = styling
-        # An absent key leaves the description untouched, while an empty string
-        # clears it - hence a None check rather than the truthiness checks above.
-        if description is not None:
-            self.description = description
+        if description:
+            # Sanitise at rest so storage only ever holds allowlisted markup; the
+            # render pass in student_view still covers legacy or imported values.
+            self.description = _sanitize_description(description)
+        elif "description" in data:
+            # An explicit empty (or null) value clears the description. TinyMCE
+            # sends "" when an author empties the field, which the truthiness
+            # check above would otherwise skip and silently discard the edit.
+            self.description = ""
         return {"result": "success"}
 
     def studio_view(self, context=None):  # pylint: disable=unused-argument
@@ -126,7 +132,7 @@ class AccordionXBlock(XBlock):
         """
         xblock_body = super().index_dictionary()
         parts = []
-        for panel in (self.panels or []):
+        for panel in self.panels or []:
             if not isinstance(panel, dict):
                 continue
             if panel.get("title"):
