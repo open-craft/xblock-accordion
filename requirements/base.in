@@ -1,8 +1,0 @@
-# Core requirements for using this application
--c constraints.txt
-
-edx-i18n-tools
-importlib-resources
-XBlock
-xblock-utils
-nh3

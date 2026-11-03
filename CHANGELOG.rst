@@ -14,7 +14,13 @@ Change Log
 Unreleased
 **********
 
-*
+Changed
+=======
+
+* Migrated packaging and dependency management to ``pyproject.toml`` and `uv`_, replacing
+  ``setup.py``, ``requirements/*.txt`` and tox. Python 3.11 is now the minimum supported version.
+
+.. _uv: https://docs.astral.sh/uv/
 
 1.2.0 – 2026-10-19
 **********************************************

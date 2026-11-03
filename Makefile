@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: dev.clean dev.build dev.run upgrade help requirements
+.PHONY: dev.clean dev.build dev.run upgrade help requirements test quality docs build
 .PHONY: extract_translations compile_translations
 .PHONY: detect_changed_source_translations dummy_translations build_dummy_translations
 .PHONY: validate_translations pull_translations push_translations install_transifex_clients
@@ -13,33 +13,32 @@ JS_TARGET := $(PACKAGE_NAME)/public/js/translations
 help:
 	@perl -nle'print $& if m{^[\.a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m  %-25s\033[0m %s\n", $$1, $$2}'
 
-# Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
-PIP_COMPILE = pip-compile --upgrade $(PIP_COMPILE_OPTS)
+upgrade: ## upgrade all locked dependencies to the latest versions allowed by pyproject.toml
+	uv lock --upgrade
 
-upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
-upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
-	pip install -qr requirements/pip-tools.txt
-	# Make sure to compile files after any other files they include!
-	$(PIP_COMPILE) --allow-unsafe -o requirements/pip.txt requirements/pip.in
-	$(PIP_COMPILE) -o requirements/pip-tools.txt requirements/pip-tools.in
-	pip install -qr requirements/pip.txt
-	pip install -qr requirements/pip-tools.txt
-	$(PIP_COMPILE) -o requirements/base.txt requirements/base.in
-	$(PIP_COMPILE) -o requirements/test.txt requirements/test.in
-	$(PIP_COMPILE) -o requirements/doc.txt requirements/doc.in
-	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in
-	$(PIP_COMPILE) -o requirements/ci.txt requirements/ci.in
-	$(PIP_COMPILE) -o requirements/dev.txt requirements/dev.in
-	# Let tox control the Django version for tests
-	sed '/^[dD]jango==/d' requirements/test.txt > requirements/test.tmp
-	mv requirements/test.tmp requirements/test.txt
+requirements: ## install development environment requirements
+	uv sync
 
-piptools: ## install pinned version of pip-compile and pip-sync
-	pip install -r requirements/pip.txt
-	pip install -r requirements/pip-tools.txt
+test: ## run the Python tests
+	mkdir -p var
+	uv run --group test pytest
 
-requirements: piptools ## install development environment requirements
-	pip-sync -q requirements/dev.txt requirements/private.*
+quality: ## run the Python code quality checks
+	uv run --group quality pylint accordion manage.py
+	uv run --group quality pycodestyle accordion manage.py
+	uv run --group quality pydocstyle accordion manage.py
+	uv run --group quality isort --check-only --diff accordion manage.py
+
+docs: ## build and validate the documentation
+	uv run --group doc doc8 --ignore-path docs/_build README.rst docs
+	rm -f docs/accordion.rst docs/modules.rst
+	DJANGO_SETTINGS_MODULE=translation_settings PYTHONPATH=$(CURDIR) uv run --group doc make -e -C docs clean
+	DJANGO_SETTINGS_MODULE=translation_settings PYTHONPATH=$(CURDIR) SPHINXOPTS=-W uv run --group doc make -e -C docs html
+
+build: ## build the sdist and wheel and check them with twine
+	rm -rf dist
+	uv build
+	uv run --group doc twine check dist/*
 
 dev.clean:
 	-docker rm $(REPO_NAME)-dev
