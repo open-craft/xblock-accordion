@@ -9,7 +9,7 @@ resolution-markers = [
 ]
 
 [manifest]
-constraints = [{ name = "django", specifier = "<6.0" }]
+constraints = [{ name = "django", specifier = ">=5.2,<6.0" }]
 
 [[package]]
 name = "accessible-pygments"

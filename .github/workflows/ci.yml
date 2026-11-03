@@ -10,12 +10,11 @@ on:
 
 jobs:
   run_tests:
-    name: tests (python ${{ matrix.python-version }}, django ${{ matrix.django-version }})
+    name: tests (python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.11", "3.12"]
-        django-version: ["4.2", "5.2"]
 
     steps:
     - uses: actions/checkout@v4
@@ -26,9 +25,7 @@ jobs:
         enable-cache: true
 
     - name: Install Dependencies
-      run: |
-        uv sync --locked --no-default-groups --group test
-        uv pip install "Django~=${{ matrix.django-version }}.0"
+      run: uv sync --locked --no-default-groups --group test
 
     - name: Run Tests
       run: |
@@ -36,7 +33,7 @@ jobs:
         uv run --no-sync pytest
 
     - name: Run coverage
-      if: matrix.python-version == '3.11' && matrix.django-version == '4.2'
+      if: matrix.python-version == '3.11'
       uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
