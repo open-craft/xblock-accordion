@@ -14,12 +14,26 @@ Change Log
 Unreleased
 **********
 
+*
+
+2.0.0 – 2026-11-04
+**********************************************
+
 Changed
 =======
 
 * Migrated packaging and dependency management to ``pyproject.toml`` and `uv`_, replacing
-  ``setup.py``, ``requirements/*.txt`` and tox. Python 3.11 is now the minimum supported version.
-* Dropped support for Django 4.2; Django 5.2 is now required.
+  ``setup.py``, ``requirements/*.txt`` and tox.
+* Python 3.11 is now the minimum supported version.
+* ``XBlock[django]`` is now a declared dependency, in place of ``XBlock``.
+
+Removed
+=======
+
+* Support for Django 4.2. Django 5.2 is the only version tested, though the package
+  metadata does not enforce a Django version.
+* The ``pydantic`` dependency, which the package does not use. Anything relying on
+  this package to install ``pydantic`` must now declare it directly.
 
 .. _uv: https://docs.astral.sh/uv/
 
