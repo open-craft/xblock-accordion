@@ -3,17 +3,13 @@ An XBlock for creating and accordion component with multiple panels with rich co
 """
 
 import html
+from importlib import resources as importlib_resources
 
 import nh3
 from django.utils import translation
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
 from xblock.fields import Dict, List, Scope, String
-
-try:
-    import importlib_resources
-except ImportError:  # pragma: no cover
-    from importlib import resources as importlib_resources
 
 
 def _strip_html(text):
