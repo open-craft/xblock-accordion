@@ -20,8 +20,13 @@ interface XBlockRuntime {
 }
 
 interface XBlockData {
+  display_name: string,
   panels: Panel[],
   styling: PanelStyling,
   // The XBlock always sends a description, using "" when the block has none.
   description: string,
+}
+
+interface XBlockConfig {
+  json_editing_enabled: boolean,
 }

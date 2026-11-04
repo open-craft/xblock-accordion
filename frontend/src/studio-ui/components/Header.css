@@ -1,7 +1,4 @@
 .pgn__modal-header.studio-header {
-  /* Custom padding to account for nav tabs height */
-  padding: calc(var(--pgn-spacing-modal-inner-padding-base) / 2)
-    var(--pgn-spacing-modal-header-padding-base-x);
   z-index: 3;
 }
 

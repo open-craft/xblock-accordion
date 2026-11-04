@@ -47,9 +47,10 @@ def test_studio_view_json_data():
     block = AccordionXBlock(ToyRuntime(), scope_ids=scope_ids)
     frag = block.studio_view()
     as_dict = frag.to_dict()
-    assert "panels" in as_dict["json_init_args"]
-    assert "styling" in as_dict["json_init_args"]
-    assert "description" in as_dict["json_init_args"]
+    assert "panels" in as_dict["json_init_args"]["data"]
+    assert "styling" in as_dict["json_init_args"]["data"]
+    assert "description" in as_dict["json_init_args"]["data"]
+    assert "json_editing_enabled" in as_dict["json_init_args"]["config"]
     assert "url" in as_dict["json_init_args"]
 
 
@@ -126,7 +127,7 @@ def test_studio_view_passes_the_stored_description_through():
     raw = '<p>Keep <span style="color: #ff0000">this</span></p>'
     block.description = raw
 
-    assert block.studio_view().to_dict()["json_init_args"]["description"] == raw
+    assert block.studio_view().to_dict()["json_init_args"]["data"]["description"] == raw
 
 
 def test_studio_save_stores_the_description():
@@ -201,5 +202,5 @@ def test_saved_description_round_trips():
     # Storage only ever holds allowlisted markup.
     assert block.description == expected
     # Studio and the student view both get that same markup back.
-    assert block.studio_view().to_dict()["json_init_args"]["description"] == expected
+    assert block.studio_view().to_dict()["json_init_args"]["data"]["description"] == expected
     assert block.student_view().to_dict()["json_init_args"]["description"] == expected

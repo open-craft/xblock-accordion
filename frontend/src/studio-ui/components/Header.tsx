@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  ActionRow, Form, IconButton, Nav, ModalDialog,
+  Form, Icon, IconButton, Nav, ModalDialog,
 } from '@openedx/paragon';
 import { EditOutline } from '@openedx/paragon/icons';
 import { type StudioTab } from '../constants';
@@ -27,38 +27,37 @@ export default function Header({
   return (
     <ModalDialog.Header className="shadow-sm studio-header">
       <div className="d-flex flex-row justify-content-between">
-        <ActionRow>
-          {isEditingName ? (
-            <Form.Control
-              type="text"
-              name="studio-title"
-              aria-label="Display name"
-              value={title}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => onTitleChange(event.target.value)}
-              onBlur={() => setIsEditingName(false)}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === 'Enter' || e.key === 'Escape') {
-                  setIsEditingName(false);
-                  e.preventDefault();
-                }
-              }}
-            />
-          ) : (
-            <h3 className="h3 col pl-0">
-              <div className="d-flex flex-row align-items-center mt-1">
-                Editing: {title || '<Untitled>'}
-                <IconButton
-                  alt="Edit display name"
-                  className="studio-header-title-edit"
-                  size="sm"
-                  src={EditOutline}
-                  onClick={() => setIsEditingName(true)}
-                />
-              </div>
-            </h3>
-          )}
-        </ActionRow>
-        <ActionRow.Spacer />
+        {isEditingName ? (
+          <Form.Control
+            type="text"
+            name="studio-title"
+            aria-label="Display name"
+            autoFocus
+            value={title}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => onTitleChange(event.target.value)}
+            onBlur={() => setIsEditingName(false)}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter' || e.key === 'Escape') {
+                setIsEditingName(false);
+                e.preventDefault();
+              }
+            }}
+          />
+        ) : (
+          <h3 className="h3 col pl-0">
+            <div className="d-flex flex-row align-items-center mt-1">
+              Editing: {title || '<Untitled>'}
+              <IconButton
+                alt="Edit display name"
+                className="studio-header-title-edit"
+                size="sm"
+                iconAs={Icon}
+                src={EditOutline}
+                onClick={() => setIsEditingName(true)}
+              />
+            </div>
+          </h3>
+        )}
         <Nav
           role="tablist"
           variant="button-group"

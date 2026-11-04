@@ -8,9 +8,11 @@ from importlib import resources as importlib_resources
 from django.utils import translation
 from pydantic import ValidationError
 from web_fragments.fragment import Fragment
+from webob.response import Response
 from xblock.core import XBlock
 from xblock.exceptions import JsonHandlerError
 from xblock.fields import Dict, List, Scope, String
+from xblock.utils.settings import XBlockWithSettingsMixin
 
 from .types import AccordionData, Panel
 from .utils import loc_to_dot_sep, strip_html
@@ -18,7 +20,8 @@ from .utils import loc_to_dot_sep, strip_html
 logger = logging.getLogger(__name__)
 
 
-class AccordionXBlock(XBlock):
+@XBlock.wants("settings")
+class AccordionXBlock(XBlock, XBlockWithSettingsMixin):
     """
     Accordion XBlock.
     """
@@ -34,6 +37,11 @@ class AccordionXBlock(XBlock):
         default="",
         scope=Scope.content,
     )
+
+    @property
+    def json_editing_enabled(self) -> bool:
+        """Flag that indicates if JSON Import Export feature is enabled."""
+        return self.get_xblock_settings({}).get("enable_json_editing", False)
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
@@ -58,6 +66,14 @@ class AccordionXBlock(XBlock):
         )
         return frag
 
+    @XBlock.handler
+    def json_schema(self, request, suffix=""):  # pragma: no cover pylint: disable=unused-argument
+        """Export the JSON Schema of the XBlock's data."""
+        return Response(
+            json=AccordionData.model_json_schema(),
+            content_disposition='attachment; filename="accordion-xblock-schema.json"'
+        )
+
     @XBlock.json_handler
     def studio_save(
         self, data, suffix=""
@@ -72,10 +88,10 @@ class AccordionXBlock(XBlock):
                 issues[item["msg"]].append(loc_to_dot_sep(item["loc"]))
             raise JsonHandlerError(400, issues) from e
 
+        self.display_name = validated.display_name
         self.panels = [p.model_dump() for p in validated.panels]
         self.styling = validated.styling
         self.description = validated.description
-        self.border_style = validated.border_style
         return {"result": "success"}
 
     def studio_view(self, context=None):  # pylint: disable=unused-argument
@@ -91,9 +107,15 @@ class AccordionXBlock(XBlock):
             "AccordionEditor",
             {
                 "url": self.runtime.local_resource_url(self, "public/studio-ui.js"),
-                "panels": self.panels,
-                "styling": self.styling,
-                "description": self.description,
+                "data": {
+                    "display_name": self.display_name,
+                    "panels": self.panels,
+                    "styling": self.styling,
+                    "description": self.description,
+                },
+                "config": {
+                    "json_editing_enabled": self.json_editing_enabled
+                }
             },
         )
         return frag

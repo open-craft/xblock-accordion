@@ -30,7 +30,6 @@ class AccordionData(BaseModel):
     panels: list[Panel]
     description: str
     styling: dict[str, str]
-    border_style: str = ""
 
     @field_validator("description", mode="after")
     @classmethod

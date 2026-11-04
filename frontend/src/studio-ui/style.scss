@@ -2,9 +2,27 @@
 @import "~@openedx/paragon/scss/core/utilities";
 @import "~@openedx/paragon/src/ColorPicker/index.scss";
 @import "~@openedx/paragon/src/Form/index.scss";
+@import "~@openedx/paragon/src/Stack/index.scss";
+// Header
+@import "~@openedx/paragon/src/Modal/index.scss";
+@import "~@openedx/paragon/src/ActionRow/index.scss";
+@import "~@openedx/paragon/src/Icon/index.scss";
+@import "~@openedx/paragon/src/IconButton/index.scss";
+@import "~@openedx/paragon/src/Nav/index.scss";
+@import "~@openedx/paragon/src/Tabs/index.scss";
+// Tab panes
+@import "~@openedx/paragon/src/Alert/index.scss";
+@import "~@openedx/paragon/src/Dropzone/index.scss";
 @import "./components/Header.css";
 
 .xblock-accordion {
+    // Scoped so the heading/element styles don't leak into the Studio page.
+    @import "~@openedx/paragon/scss/core/typography";
+
+    .h3 {
+        font-size: 100%;
+    }
+
     .d-flex {
         display: flex;
     }
@@ -24,17 +42,26 @@
     label {
         font-size: 1.6rem;
     }
-}
 
-.accordion-studio {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* Take over the full height of the modal to sticky header/footer work correctly */
-  min-height: 635px;
-}
+    .tab-pane .alert.alert-danger {
+        color: var(--pgn-color-dark-500, #444);
+        font-size: small;
+    }
 
-.accordion-studio-tab-content {
-  flex: 1 1 auto;
-  min-height: 0;
+    .accordion-studio {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Take over the full height of the modal to sticky header/footer work correctly */
+        min-height: 635px;
+    }
+
+    .accordion-studio-tab-content {
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .btn {
+        font-size: 100%;
+    }
 }

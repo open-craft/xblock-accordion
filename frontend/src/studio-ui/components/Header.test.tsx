@@ -92,7 +92,6 @@ describe('Header', () => {
       'My Component',
     );
   });
-
   it('reports title changes and shows them in the heading after Enter', async () => {
     const user = userEvent.setup();
     const onTitleChange = vi.fn();
