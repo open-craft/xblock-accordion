@@ -85,6 +85,7 @@ class AccordionXBlock(XBlock):
         editor_html = self.resource_string("static/html/accordion.html")
         frag = Fragment(editor_html)
         frag.add_javascript(self.resource_string("static/studio.js"))
+        frag.add_css(self.resource_string("static/css/studio.css"))
         frag.add_css_url(self.runtime.local_resource_url(self, "public/studio-ui.css"))
         frag.initialize_js(
             "AccordionEditor",

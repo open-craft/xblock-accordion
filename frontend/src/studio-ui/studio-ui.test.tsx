@@ -1,5 +1,5 @@
 import {
-  describe, expect, it, vi,
+  beforeEach, describe, expect, it, vi,
 } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -31,17 +31,32 @@ describe('StudioUi component test', () => {
     runtime: { notify: mockNotify, handlerUrl: vi.fn() },
   };
 
-  it('switches between StylingPage and EditingPage', async () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('switches between the Content and Settings tabs', async () => {
     render(<StudioUi {...studioUiProps} />);
-    await userEvent.click(screen.getByRole('link', { name: /Continue/i }));
-    expect(screen.getByRole('link', { name: /Back/i }))
-      .toBeInTheDocument();
-    await userEvent.click(screen.getByRole('link', { name: /Back/i }));
+
+    expect(screen.getByText('Description')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('tab', { name: /Settings/i }));
+    expect(screen.getByText('Styling of Accordions')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('tab', { name: /Content/i }));
+    expect(screen.getByText('Description')).toBeInTheDocument();
+  });
+
+  it('shows the JSON editor tab', async () => {
+    render(<StudioUi {...studioUiProps} />);
+
+    await userEvent.click(screen.getByRole('tab', { name: /JSON/i }));
+    expect(screen.getByText('JSON Editor')).toBeInTheDocument();
   });
 
   it('runs onSave when clicking Save', async () => {
     render(<StudioUi {...studioUiProps} />);
-    await userEvent.click(screen.getByRole('link', { name: /Save/i }));
+    await userEvent.click(screen.getByRole('button', { name: /Save/i }));
     expect(mockNotify)
       .toHaveBeenCalledTimes(2);
     expect(mockNotify)
@@ -57,14 +72,14 @@ describe('StudioUi component test', () => {
 
   it('runs onCancel when clicking Cancel', async () => {
     render(<StudioUi {...studioUiProps} />);
-    await userEvent.click(screen.getByRole('link', { name: /Cancel/i }));
+    await userEvent.click(screen.getByRole('button', { name: /Cancel/i }));
     expect(mockNotify)
       .toHaveBeenCalledWith('cancel', {});
   });
 
   it('saves the description', async () => {
     render(<StudioUi {...studioUiProps} initialDescription="<p>Intro</p>" />);
-    await userEvent.click(screen.getByRole('link', { name: /Save/i }));
+    await userEvent.click(screen.getByRole('button', { name: /Save/i }));
     expect(jqueryMock.post).toHaveBeenCalledWith(studioSaveUrl, JSON.stringify({
       styling: {},
       panels: [],
