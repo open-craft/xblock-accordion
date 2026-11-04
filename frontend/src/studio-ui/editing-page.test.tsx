@@ -44,7 +44,7 @@ describe('EditingPage', () => {
         setDescription={vi.fn()}
       />,
     );
-    await user.click(screen.getByText(/Add Accordion/i));
+    await user.click(screen.getByText(/Add Item/i));
     expect(setPanels)
       .toHaveBeenCalledTimes(1);
   });

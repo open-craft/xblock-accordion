@@ -5,28 +5,43 @@ import {
 import StylingPage from './styling-page';
 import EditingPage from './editing-page';
 import Header from './components/Header';
+import JSONImporter from './components/JSONImporter';
 import { EDITOR_TABS } from './constants';
 
 interface StudioUiProps {
+  initialDisplayName: string
   initialPanels: Panel[]
   initialStyling: PanelStyling
   initialDescription: string
   studioSaveUrl: string
   runtime: XBlockRuntime
+  element: XBlockElementLike
+  config: XBlockConfig
 }
 
 export default function StudioUi({
-  initialPanels, initialStyling, initialDescription, studioSaveUrl, runtime,
+  initialDisplayName,
+  initialPanels, initialStyling, initialDescription, studioSaveUrl, runtime, element, config,
 }: StudioUiProps) {
+  const [displayName, setDisplayName] = React.useState(initialDisplayName);
   const [styling, setStyling] = React.useState(initialStyling);
   const [panels, setPanels] = React.useState(initialPanels);
   const [description, setDescription] = React.useState(initialDescription);
   const defaultTab = EDITOR_TABS[0].key;
   const [activeTab, setActiveTab] = React.useState(defaultTab);
+  let tabs = EDITOR_TABS;
+  if (!config.json_editing_enabled) {
+    tabs = tabs.filter((t) => t.key !== 'json');
+  }
 
   const handleSave = () => {
     runtime.notify('save', { state: 'start' });
-    $.post(studioSaveUrl, JSON.stringify({ styling, panels, description }))
+    $.post(studioSaveUrl, JSON.stringify({
+      display_name: displayName,
+      styling,
+      panels,
+      description,
+    }))
       .done(() => {
         runtime.notify('save', { state: 'end' });
       })
@@ -45,9 +60,9 @@ export default function StudioUi({
       >
         <div className="accordion-studio">
           <Header
-            title="Accordion"
-            onTitleChange={() => {}}
-            tabs={EDITOR_TABS}
+            title={displayName}
+            onTitleChange={(value: string) => setDisplayName(value)}
+            tabs={tabs}
             activeTab={activeTab}
           />
 
@@ -64,9 +79,19 @@ export default function StudioUi({
               <TabPane eventKey="settings">
                 <StylingPage styling={styling} setStyling={setStyling} />
               </TabPane>
-              <TabPane>
-                <div>JSON Editor</div>
-              </TabPane>
+              {
+                config.json_editing_enabled && (
+                  <TabPane eventKey="json">
+                    <JSONImporter
+                      liveData={{
+                        display_name: displayName, description, panels, styling,
+                      }}
+                      runtime={runtime}
+                      element={element}
+                    />
+                  </TabPane>
+                )
+              }
             </TabContent>
           </ModalDialog.Body>
 

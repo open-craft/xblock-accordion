@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  ActionRow, Form, IconButton, Nav, ModalDialog,
+  ActionRow, Form, Icon, IconButton, Nav, ModalDialog,
 } from '@openedx/paragon';
 import { EditOutline } from '@openedx/paragon/icons';
 import { type StudioTab } from '../constants';
@@ -51,6 +51,7 @@ export default function Header({
                   alt="Edit display name"
                   className="studio-header-title-edit"
                   size="sm"
+                  iconAs={Icon}
                   src={EditOutline}
                   onClick={() => setIsEditingName(true)}
                 />
