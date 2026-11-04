@@ -1,43 +1,21 @@
 """
 An XBlock for creating and accordion component with multiple panels with rich content.
 """
-
-import html
+import logging
+from collections import defaultdict
 from importlib import resources as importlib_resources
 
-import nh3
 from django.utils import translation
+from pydantic import ValidationError
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
+from xblock.exceptions import JsonHandlerError
 from xblock.fields import Dict, List, Scope, String
 
+from .types import AccordionData, Panel
+from .utils import loc_to_dot_sep, strip_html
 
-def _strip_html(text):
-    """Reduce HTML to searchable plain text; script/style contents are dropped."""
-    text = (text or "").replace("<", " <")
-    return " ".join(html.unescape(nh3.clean(text, tags=set())).split())
-
-
-# The description is authored in TinyMCE, so its markup is sanitised when it is
-# saved: storage and the student view both only see allowlisted markup. The
-# allowlist is deliberately narrow (an accordion description is introductory copy)
-# and is mirrored by the Studio editor, which only offers these formats and no
-# media/link/table controls.
-#
-# Values written outside studio_save - an OLX import, a content-library copy, or a
-# direct field assignment - bypass this and are trusted as-is.
-
-_DESCRIPTION_TAGS = {"p", "strong", "em", "h3", "h4", "br"}
-_DESCRIPTION_ATTRIBUTES = {}
-
-
-def _sanitize_description(text):
-    """Sanitize author-provided description markup before it is stored."""
-    return nh3.clean(
-        text or "",
-        tags=_DESCRIPTION_TAGS,
-        attributes=_DESCRIPTION_ATTRIBUTES,
-    )
+logger = logging.getLogger(__name__)
 
 
 class AccordionXBlock(XBlock):
@@ -85,22 +63,19 @@ class AccordionXBlock(XBlock):
         self, data, suffix=""
     ):  # pragma: no cover pylint: disable=unused-argument
         """Save config and data based on data received at this API endpoint."""
-        panels = data.get("panels", None)
-        styling = data.get("styling", None)
-        description = data.get("description", None)
-        if panels:
-            self.panels = panels
-        if styling:
-            self.styling = styling
-        if description:
-            # Sanitise at rest so storage only ever holds allowlisted markup; the
-            # render pass in student_view still covers legacy or imported values.
-            self.description = _sanitize_description(description)
-        elif "description" in data:
-            # An explicit empty (or null) value clears the description. TinyMCE
-            # sends "" when an author empties the field, which the truthiness
-            # check above would otherwise skip and silently discard the edit.
-            self.description = ""
+        try:
+            validated = AccordionData.model_validate(data)
+        except ValidationError as e:
+            logger.exception("Invalid data received from studio.")
+            issues = defaultdict(list)
+            for item in e.errors():
+                issues[item["msg"]].append(loc_to_dot_sep(item["loc"]))
+            raise JsonHandlerError(400, issues) from e
+
+        self.panels = [p.model_dump() for p in validated.panels]
+        self.styling = validated.styling
+        self.description = validated.description
+        self.border_style = validated.border_style
         return {"result": "success"}
 
     def studio_view(self, context=None):  # pylint: disable=unused-argument
@@ -127,17 +102,21 @@ class AccordionXBlock(XBlock):
         Return dictionary prepared with block content and type for indexing.
         """
         xblock_body = super().index_dictionary()
-        parts = []
-        for panel in self.panels or []:
-            if not isinstance(panel, dict):
+        parts = [strip_html(self.description)]
+        for panel in self.panels:
+            try:
+                validated = Panel.model_validate(panel)
+            except ValidationError:
+                logger.warning(
+                    "Skipping malformed panel while indexing block %s",
+                    self.scope_ids.usage_id
+                )
                 continue
-            if panel.get("title"):
-                parts.append(str(panel["title"]))
-            if panel.get("contents"):
-                parts.append(_strip_html(str(panel["contents"])))
+            parts.append(validated.searchable_text())
+
         index_body = {
             "display_name": self.display_name,
-            "accordion_content": " ".join(parts).strip(),
+            "accordion_content": strip_html(" ".join(parts).strip()),
         }
         if "content" in xblock_body:
             xblock_body["content"].update(index_body)
