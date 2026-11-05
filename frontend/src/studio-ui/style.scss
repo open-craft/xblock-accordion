@@ -2,6 +2,7 @@
 @import "~@openedx/paragon/scss/core/utilities";
 @import "~@openedx/paragon/src/ColorPicker/index.scss";
 @import "~@openedx/paragon/src/Form/index.scss";
+@import "./components/Header.css";
 
 .xblock-accordion {
     .d-flex {
@@ -25,14 +26,20 @@
     }
 }
 
-.xblock--accordion--editor .editor-layout {
-    height: 375px;
+.accordion-studio {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Take over the full height of the modal to sticky header/footer work correctly */
+  min-height: 635px;
 }
 
-.xblock-iframe-content .xblock--accordion--editor .editor-layout {
-    height: max(375px, calc(100vh - 40px));
+.accordion-studio-tab-content {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
-.xblock-iframe-content .xblock--accordion--editor .editor-layout .xblock-actions {
-    margin-top: auto;
+.tab-pane .alert.alert-danger {
+    color: var(--pgn-color-dark-500, #444);
+    font-size: small;
 }

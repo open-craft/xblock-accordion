@@ -6,7 +6,8 @@ const mockRuntime: XBlockRuntime = {
   notify: (action, data) => console.log(`${action} ${JSON.stringify(data)}`),
 };
 
-renderEditor(mockRuntime, document.querySelector('#root'), {
+renderEditor(mockRuntime, document.querySelector('#root')!, {
+  display_name: 'Accordion',
   description: '<p>An <strong>intro</strong> description.</p>',
   panels: [
     {
@@ -15,4 +16,6 @@ renderEditor(mockRuntime, document.querySelector('#root'), {
     },
   ],
   styling: {},
+}, {
+  json_editing_enabled: true,
 });

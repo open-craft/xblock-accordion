@@ -22,7 +22,7 @@ function EditingPage({
 }: EditingPageProps) {
   const [selectedPanel, setSelectedPanel] = React.useState<number | null>(0);
   const addNewPanel = () => {
-    setPanels([...panels, { title: null, contents: '' }]);
+    setPanels([...panels, { title: '', contents: '' }]);
     setSelectedPanel(panels.length);
   };
   const updatePanel = (idx: number, change: Partial<Panel>) => {
@@ -53,7 +53,7 @@ function EditingPage({
   };
   return (
     <>
-      <div className="d-flex flex-column mb-2">
+      <div className="d-flex flex-column">
         <label className="mb-2" htmlFor={DESCRIPTION_ID}>Description</label>
         <TinyMceEditor
           id={DESCRIPTION_ID}
@@ -65,8 +65,8 @@ function EditingPage({
           height="200px"
         />
       </div>
-      <div className="d-flex justify-content-end">
-        <Button iconBefore={Plus} onClick={addNewPanel}>Add Accordion</Button>
+      <div className="d-flex justify-content-start m-2 mt-4">
+        <Button iconBefore={Plus} onClick={addNewPanel}>Add Item</Button>
       </div>
       <div className="d-flex flex-row mx-2">
         <div className="d-flex flex-column mr-2" style={{ flexGrow: 1, width: '25%' }}>

@@ -14,7 +14,16 @@ Change Log
 Unreleased
 **********
 
-*
+Added
+=====
+
+* Add support for importing and exporting the XBlock data as JSON in the Studio editor.
+
+Changed
+=======
+
+* Make the ``display_name`` value editable.
+
 
 2.0.0 – 2026-11-04
 **********************************************

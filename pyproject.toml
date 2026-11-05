@@ -39,6 +39,7 @@ dependencies = [
     "nh3",
     "XBlock[django]",
     "xblock-utils",
+    "pydantic>=2.14.2",
 ]
 
 [project.entry-points."xblock.v1"]

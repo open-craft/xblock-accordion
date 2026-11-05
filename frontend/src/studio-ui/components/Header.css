@@ -1,0 +1,31 @@
+.pgn__modal-header.studio-header {
+  /* Custom padding to account for nav tabs height */
+  padding: calc(var(--pgn-spacing-modal-inner-padding-base) / 2)
+    var(--pgn-spacing-modal-header-padding-base-x);
+  z-index: 3;
+}
+
+.studio-header-title {
+  display: flex;
+  align-items: center;
+  gap: var(--pgn-spacing-spacer-2, 8px);
+}
+
+.studio-header-tabs-nav {
+  flex-wrap: nowrap;
+  /* Avoid the full screen button sitting on top of the tabs. */
+  padding-right: 64px;
+}
+
+/*
+ * The tabs are rendered as <button> elements for correct semantics. Reset the
+ * browser's default button styling so Paragon's nav-link styles apply cleanly.
+ */
+.studio-header-tabs-nav .nav-link {
+  appearance: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}

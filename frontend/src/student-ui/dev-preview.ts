@@ -1,6 +1,7 @@
 import { renderBlock } from './index';
 
 renderBlock(document.querySelector('#root'), {
+  display_name: 'Accordion',
   description: '<h3>About this module</h3><p>Read each section, then expand it.</p>',
   panels: [
     {
