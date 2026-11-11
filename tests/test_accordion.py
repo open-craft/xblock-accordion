@@ -88,6 +88,18 @@ def test_index_dictionary():
     assert "solid" not in str(result["content"])
 
 
+def test_student_view_data():
+    """Test that the index_dictionary alias works."""
+    block = _new_block()
+    block.display_name = "My Accordion"
+    block.panels = [{"title": "First panel", "contents": "<p>Hello</p>"}]
+
+    result = block.student_view_data()
+
+    assert result == block.index_dictionary()
+    assert result["content_type"] == "Accordion"
+
+
 def test_index_dictionary_empty_panels():
     """Test index_dictionary with no panels and malformed panel entries."""
     scope_ids = ScopeIds("1", "2", "3", "4")
