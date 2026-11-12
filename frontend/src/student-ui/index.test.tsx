@@ -9,6 +9,7 @@ describe('renderBlock', () => {
     const container = document.createElement('div');
 
     renderBlock(container, {
+      display_name: 'Accordion',
       panels: [],
       styling: {},
       description: '<p>Intro</p>',
@@ -22,7 +23,9 @@ describe('renderBlock', () => {
   it('renders blocks saved before the description existed', () => {
     const container = document.createElement('div');
 
-    renderBlock(container, { panels: [], styling: {}, description: '' });
+    renderBlock(container, {
+      display_name: 'Accordion', panels: [], styling: {}, description: '',
+    });
 
     // The view renders, but without a description element.
     expect(container.querySelector('.xblock-accordion')).not.toBeNull();

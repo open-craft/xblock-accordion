@@ -10,7 +10,7 @@ from xblock.fields import ScopeIds
 from xblock.test.toy_runtime import ToyRuntime
 
 from accordion import AccordionXBlock
-from accordion.accordion import _strip_html
+from accordion.utils import strip_html
 
 
 def _new_block():
@@ -24,8 +24,9 @@ def _post_request(payload):
 
 
 def _studio_save(block, payload):
-    """Call studio_save through its json_handler wrapper and return the response body."""
-    return block.studio_save(_post_request(payload)).json
+    """Call studio_save with a complete payload and return the response body."""
+    full_payload = {"panels": [], "styling": {}, "description": "", **payload}
+    return block.studio_save(_post_request(full_payload)).json
 
 
 def test_student_view_json_data():
@@ -46,9 +47,10 @@ def test_studio_view_json_data():
     block = AccordionXBlock(ToyRuntime(), scope_ids=scope_ids)
     frag = block.studio_view()
     as_dict = frag.to_dict()
-    assert "panels" in as_dict["json_init_args"]
-    assert "styling" in as_dict["json_init_args"]
-    assert "description" in as_dict["json_init_args"]
+    assert "panels" in as_dict["json_init_args"]["data"]
+    assert "styling" in as_dict["json_init_args"]["data"]
+    assert "description" in as_dict["json_init_args"]["data"]
+    assert "json_editing_enabled" in as_dict["json_init_args"]["config"]
     assert "url" in as_dict["json_init_args"]
 
 
@@ -100,15 +102,15 @@ def test_index_dictionary_empty_panels():
 
 def test_strip_html_hardening():
     """Script/style contents are dropped and markup edge cases are handled."""
-    assert _strip_html('<script src="x.js">secret()</script>visible') == "visible"
-    assert _strip_html("<style>.a{color:red}</style>styled") == "styled"
-    assert _strip_html('<img alt="a > b">text') == "text"
-    assert _strip_html("<p>foo</p><p>bar</p>") == "foo bar"
+    assert strip_html('<script src="x.js">secret()</script>visible') == "visible"
+    assert strip_html("<style>.a{color:red}</style>styled") == "styled"
+    assert strip_html('<img alt="a > b">text') == "text"
+    assert strip_html("<p>foo</p><p>bar</p>") == "foo bar"
     assert (
-        _strip_html("see https://example.com <!-- hidden -->")
+        strip_html("see https://example.com <!-- hidden -->")
         == "see https://example.com"
     )
-    assert _strip_html(None) == ""
+    assert strip_html(None) == ""
 
 
 def test_description_defaults_to_empty():
@@ -125,7 +127,7 @@ def test_studio_view_passes_the_stored_description_through():
     raw = '<p>Keep <span style="color: #ff0000">this</span></p>'
     block.description = raw
 
-    assert block.studio_view().to_dict()["json_init_args"]["description"] == raw
+    assert block.studio_view().to_dict()["json_init_args"]["data"]["description"] == raw
 
 
 def test_studio_save_stores_the_description():
@@ -146,16 +148,6 @@ def test_studio_save_clears_the_description():
     assert block.description == ""
 
 
-def test_studio_save_treats_an_explicit_null_as_clearing():
-    """A null description clears the field, so None is never stored."""
-    block = _new_block()
-    block.description = "<p>Old</p>"
-
-    _studio_save(block, {"description": None})
-
-    assert block.description == ""
-
-
 def test_studio_save_sanitises_the_description_at_rest():
     """Hostile markup never reaches storage; only the allowlisted subset is kept."""
     block = _new_block()
@@ -170,6 +162,35 @@ def test_studio_save_sanitises_the_description_at_rest():
     assert block.description == "<p>ok</p>"
 
 
+def test_studio_save_accpets_a_panel_with_a_null_title():
+    """
+    Older versions of frontend set the default title valut to `null`. This will be normalized
+    to an empty string by the pydantic model's custom validator.
+    """
+    block = _new_block()
+    payload = {
+        "panels": [{"title": None, "contents": "Body"}],
+        "styling": {},
+        "description": "",
+    }
+
+    response = block.studio_save(_post_request(payload))
+
+    assert response.status_code == 200
+    assert block.panels == [{"title": "", "contents": "Body"}]
+
+
+def test_studio_save_rejects_an_incomplete_payload():
+    """Missing required fields return a 400 and leave the stored data untouched."""
+    block = _new_block()
+    block.description = "<p>Old</p>"
+
+    response = block.studio_save(_post_request({"description": "<p>New</p>"}))
+
+    assert response.status_code == 400
+    assert block.description == "<p>Old</p>"
+
+
 def test_saved_description_round_trips():
     """A saved description is sanitised at rest, then rendered unchanged."""
     block = _new_block()
@@ -181,5 +202,5 @@ def test_saved_description_round_trips():
     # Storage only ever holds allowlisted markup.
     assert block.description == expected
     # Studio and the student view both get that same markup back.
-    assert block.studio_view().to_dict()["json_init_args"]["description"] == expected
+    assert block.studio_view().to_dict()["json_init_args"]["data"]["description"] == expected
     assert block.student_view().to_dict()["json_init_args"]["description"] == expected

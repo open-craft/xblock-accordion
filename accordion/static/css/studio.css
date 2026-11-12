@@ -1,0 +1,8 @@
+/* Remove the padding of modal */
+[class*="view-"] .modal-window {
+    padding: 1px;
+}
+/* Add some height to the modal. studio-main-v1.css sets this to 435px for some reason. */
+[class*="view-"] .modal-lg.modal-editor .modal-content {
+    min-height: 635px;
+}
