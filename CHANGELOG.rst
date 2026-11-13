@@ -14,6 +14,18 @@ Change Log
 Unreleased
 **********
 
+2.1.1 – 2026-11-13
+**********************************************
+
+Added
+=====
+
+* ``student_view_data`` alias for ``index_dictionary``, so the block's indexed content
+  is available to the "Data Bricks" indexer.
+
+2.1.0 – 2026-11-12
+**********************************************
+
 Added
 =====
 
@@ -23,7 +35,6 @@ Changed
 =======
 
 * Make the ``display_name`` value editable.
-
 
 2.0.0 – 2026-11-04
 **********************************************
